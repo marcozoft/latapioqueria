@@ -43,21 +43,21 @@ Las 4 fotos del FoodTruck Lolog llegaron como `.HEIC` (formato nativo de iPhone)
 
 ## Video
 
-`assets/como-se-hace-una-tapioca.mp4` (sección "Cómo se hace" de `que-es-una-tapioca.dc.html`) llegó como un archivo de **42MB**: 1080×1920 (vertical, formato teléfono), H.264 a ~12.2 Mbps, 27.5s, con audio AAC. Insostenible para web. Quedó en **2.9MB (–93%)** así:
+`assets/como-se-hace-una-tapioca.mp4` (sección "Cómo se hace" de `que-es-una-tapioca.dc.html`) llegó como un archivo de **42MB**: 1080×1920 (vertical, formato teléfono), H.264 a ~12.2 Mbps, 27.5s, con audio AAC. Insostenible para web. Quedó en **4.1MB (–90%)** así:
 
 ```
-ffmpeg -i entrada.mp4 -vf "crop=1080:608:0:656,scale=960:540" \
+ffmpeg -i entrada.mp4 -vf "scale=720:1280" \
   -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p \
   -c:a aac -b:a 96k -ac 2 -movflags +faststart salida.mp4
 ```
 
-- **`crop=1080:608:0:656`** — el `<video>` vive en una caja `aspect-ratio:16/9` con `object-fit:cover`; el archivo original es vertical (9:16), así que el navegador ya iba a recortar el centro para llenar esa caja. En vez de dejar que ese recorte pase en el navegador (descargando los ~1312px de alto que nunca se ven), se recorta en el servidor a los mismos 1080×608 centrados que `object-fit:cover` habría mostrado — mismo resultado visual, una fracción de los bytes.
-- **`scale=960:540`** — el contenido nunca se muestra a más de `max-width:1120px`, así que 960px de ancho alcanza de sobra.
+- **Se mantiene el formato vertical original** (9:16) — la primera versión lo recortaba a 16:9 para que coincidiera con una caja horizontal, pero eso rompía el encuadre pensado por quien filmó el video. El contenedor en `que-es-una-tapioca.dc.html` se adaptó al video en vez de al revés: `aspect-ratio:9/16` con `width:min(100%,400px)`, centrado — mismo patrón que la galería vertical del FoodTruck Lolog en `donde-encontrarnos.dc.html`.
+- **`scale=720:1280`** — el contenido nunca se muestra a más de 400px de ancho en CSS (~800px a 2x retina), así que 720px de ancho alcanza de sobra sin perder nitidez; se preserva la proporción 9:16 exacta del original, sin distorsión.
 - **`-crf 26 -preset slow`** — calidad constante orientada a tamaño (no a un bitrate fijo); `slow` gasta más tiempo de encode a cambio de mejor relación calidad/peso. Verificado visualmente extrayendo frames en varios segundos del clip (incluye un cartel con texto, legible sin artefactos).
 - **`-movflags +faststart`** — mueve el índice del MP4 (`moov atom`) al principio del archivo para que el video pueda empezar a reproducirse antes de descargarse completo (necesario para servir desde cualquier host estático, sin esto el navegador a veces debe bajar todo el archivo primero).
 - El audio original venía a 125kbps; bajó a 96kbps AAC estéreo, imperceptible en este contenido.
 
-También se generó `uploads/tapioca-video-poster.jpg` (68KB) — un frame del propio video ya recortado a 960×540, usado como `poster` del `<video>` para que se vea una miniatura real en vez de un cuadro negro antes de reproducir. De paso se sacó el overlay placeholder ("Video: assets/como-se-hace-una-tapioca.mp4" con ícono de play) que tapaba el video real una vez cargado — era un recordatorio visual del editor de diseño para cuando el slot estaba vacío, ya no aplica.
+También se generó `uploads/tapioca-video-poster.jpg` (88KB, 720×1280) — un frame del propio video, usado como `poster` del `<video>` para que se vea una miniatura real en vez de un cuadro negro antes de reproducir. De paso se sacó el overlay placeholder ("Video: assets/como-se-hace-una-tapioca.mp4" con ícono de play) que tapaba el video real una vez cargado — era un recordatorio visual del editor de diseño para cuando el slot estaba vacío, ya no aplica.
 
 FFmpeg tampoco estaba instalado (se agregó vía `winget install Gyan.FFmpeg`, mismo criterio que ImageMagick para las imágenes).
 
