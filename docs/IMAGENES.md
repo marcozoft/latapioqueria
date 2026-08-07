@@ -17,8 +17,9 @@ Objetivo: toda imagen servida por el sitio pesa **≤100KB** para priorizar velo
 | `uploads/DSC_0035.jpg` | Que es una tapioca | Foto "Salchipapa" | 1212KB | 96KB |
 | `uploads/DSC_0056.jpg` | Que es una tapioca | Foto "Birra tirada" | 1644KB | 96KB |
 | `uploads/resto_bar (1).jpg` … `(9).jpg` | Donde encontrarnos | Galería crossfade Resto Bar | 1528–2876KB c/u | 96–100KB c/u |
+| `uploads/lolog-1.jpg` … `lolog-4.jpg` | Donde encontrarnos | Galería crossfade FoodTruck Lolog | 980KB–4.4MB c/u *(`.HEIC`)* | 96KB c/u *(`.jpg`)* |
 
-**Peso total de imágenes servidas por el sitio:** ~16.8MB → **~1.06MB** (–94%).
+**Peso total de imágenes servidas por el sitio:** ~25.9MB → **~1.44MB** (–94%).
 
 ## Cómo se optimizó (para repetir el proceso con fotos nuevas)
 
@@ -38,6 +39,8 @@ Para WebP (fondos/decoración), `jpeg:extent` no aplica — el ajuste de tamaño
 
 Antes de instalar ImageMagick se comprobó que PowerShell/`System.Drawing` (.NET) no puede decodificar `.webp` — de ahí la necesidad de instalar una herramienta externa.
 
+Las 4 fotos del FoodTruck Lolog llegaron como `.HEIC` (formato nativo de iPhone) — **ningún navegador de escritorio ni Android lo soporta**, así que además de comprimirlas hubo que convertirlas a `.jpg`. El comando fue el mismo de arriba sumando `-auto-orient` antes de `-strip`: las HEIC de iPhone traen la imagen guardada "de costado" con un tag EXIF que indica cuánto rotarla al mostrarla, y `-strip` borra ese tag — sin `-auto-orient` primero, las 4 fotos se habrían guardado giradas 90°.
+
 ## Imágenes fuera de este objetivo (no tocadas)
 
 - `screenshots/*.png` (6 archivos, 24-32KB c/u): capturas de la propia herramienta de diseño, no referenciadas por ningún `.dc.html` — no forman parte de lo que se sirve al visitante.
@@ -52,9 +55,10 @@ Estos archivos **no están referenciados en ningún `.dc.html`** — no afectan 
 | `_unused/uploads/pasted-1786058049081-0.png` | Imagen pegada sin uso identificado. |
 | `_unused/uploads/BEBIDAS A4 IMPRESION (1).png`, `(2).png`, `.jpg` | Variantes/duplicados del emblema; solo `uploads/BEBIDAS A4 IMPRESION.png` (sin sufijo) está en uso. |
 | `_unused/assets/menu-hero.png` | Versión original sin comprimir, reemplazada por `assets/menu-hero.jpg` (ver tabla arriba). |
+| `_unused/uploads/lolog (1-4).HEIC` | Originales sin comprimir de las fotos del FoodTruck Lolog, reemplazadas por `uploads/lolog-1.jpg` … `lolog-4.jpg` (ver tabla arriba). |
 
 No tocados (fuera del alcance de esta limpieza, no son imágenes): `uploads/menu.pdf`, `uploads/Menú • La Tapioquería.pdf`, `uploads/Menú • La Tapioquería-5e170f0a.pdf` — tres PDFs de la carta, tampoco referenciados en el sitio, aparentemente redundantes entre sí.
 
 ## Pendiente / fuera de alcance de esta tarea
 
-- Los 3 `<image-slot>` de `que-es-una-tapioca.dc.html` y los 4 de `donde-encontrarnos.dc.html` siguen vacíos (ver [PAGINAS.md](PAGINAS.md)) — cuando se carguen esas fotos, aplicar el mismo proceso de compresión antes de subirlas.
+- Los 3 `<image-slot>` de `que-es-una-tapioca.dc.html` siguen vacíos (ver [PAGINAS.md](PAGINAS.md)) — cuando se carguen esas fotos, aplicar el mismo proceso de compresión antes de subirlas. Los 4 de `donde-encontrarnos.dc.html` ya se completaron (fotos del FoodTruck Lolog, 2026-08-06).

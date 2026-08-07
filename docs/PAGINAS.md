@@ -24,7 +24,7 @@ Contexto detallado de cada `.dc.html`. Ver [../CLAUDE.md](../CLAUDE.md) para la 
 
 - **Hero**: mismo fondo que Home (`fondo_principal_tapio_h.webp`), oscurecido.
 - **Sección 1 — Resto Bar** (todo el año): Belgrano 940, San Martín de los Andes. Galería de 9 fotos (`uploads/resto_bar (1-9).jpg`) en crossfade automático (`animation:crossfade9`, ciclo de 36s). Link a Google Maps.
-- **Sección 2 — FoodTruck Lago Lolog** (solo verano, enero-marzo): Playa Bonita. **4 `<image-slot>` vacíos** ("lolog-foto-1" a "4") — sin fotos cargadas todavía. Link a Google Maps.
+- **Sección 2 — FoodTruck Lago Lolog** (solo verano, enero-marzo): Playa Bonita. Galería vertical de 4 fotos en crossfade (`uploads/lolog-1.jpg` a `lolog-4.jpg`, `animation:crossfade4`, ciclo de 24s) — el foodtruck, tapiocas y papas a orillas del lago. Link a Google Maps.
 
 ## `que-es-una-tapioca.dc.html` — Sobre el producto
 
