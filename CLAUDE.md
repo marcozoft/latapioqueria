@@ -45,9 +45,9 @@ Si se retoca el diseño, mantener esta paleta/tipografía real (no la del readme
 
 ## Huecos de contenido conocidos
 
-- **`que-es-una-tapioca.dc.html`**: referencia `assets/como-se-hace-una-tapioca.mp4`, que **no existe** en `assets/` — el `<video>` no tiene fuente. También tiene 3 `<image-slot>` sin imagen cargada ("Foto de tapioca 1/2/3").
+- **`que-es-una-tapioca.dc.html`**: tiene 3 `<image-slot>` sin imagen cargada ("Foto de tapioca 1/2/3"). Para completarlos, reemplazar el `<image-slot>` por un `<img>` normal apuntando a `uploads/` (igual que el resto del sitio) — es el patrón que ya siguen todas las demás imágenes del sitio.
 
-Para completarlos hay que subir el video/fotos y, si corresponde, reemplazar los `<image-slot>` por `<img>` normales apuntando a `uploads/` (igual que el resto del sitio) — es el patrón que ya siguen todas las demás imágenes del sitio. `donde-encontrarnos.dc.html` ya no tiene `<image-slot>` (se completaron las 4 fotos del FoodTruck del Lolog el 2026-08-06) ni el `<script src="./image-slot.js">` — si se vuelve a necesitar un slot vacío en esta página, hay que reagregar ese script.
+`donde-encontrarnos.dc.html` ya no tiene `<image-slot>` (se completaron las 4 fotos del FoodTruck del Lolog el 2026-08-06) ni el `<script src="./image-slot.js">` — si se vuelve a necesitar un slot vacío en esta página, hay que reagregar ese script. El video de `que-es-una-tapioca.dc.html` (`assets/como-se-hace-una-tapioca.mp4`) también se completó el 2026-08-07 — ver [docs/IMAGENES.md](docs/IMAGENES.md#video) para cómo se comprimió.
 
 ## Imágenes y SEO
 

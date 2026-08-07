@@ -1,6 +1,6 @@
-# Imágenes — inventario y optimización SEO
+# Imágenes y video — inventario y optimización SEO
 
-Objetivo: toda imagen servida por el sitio pesa **≤100KB** para priorizar velocidad de carga y SEO (Core Web Vitals / LCP). Optimización realizada el 2026-08-06 con **ImageMagick 7.1.2** (instalado vía `winget install ImageMagick.ImageMagick` — no estaba disponible en el sistema antes de esta tarea).
+Objetivo: toda imagen servida por el sitio pesa **≤100KB** para priorizar velocidad de carga y SEO (Core Web Vitals / LCP). Optimización de imágenes realizada el 2026-08-06 con **ImageMagick 7.1.2** (instalado vía `winget install ImageMagick.ImageMagick` — no estaba disponible en el sistema antes de esta tarea). El único video del sitio se comprimió el 2026-08-07 con **FFmpeg** (ver [Video](#video) más abajo).
 
 ## Imágenes usadas por el sitio (todas ≤100KB)
 
@@ -41,6 +41,26 @@ Antes de instalar ImageMagick se comprobó que PowerShell/`System.Drawing` (.NET
 
 Las 4 fotos del FoodTruck Lolog llegaron como `.HEIC` (formato nativo de iPhone) — **ningún navegador de escritorio ni Android lo soporta**, así que además de comprimirlas hubo que convertirlas a `.jpg`. El comando fue el mismo de arriba sumando `-auto-orient` antes de `-strip`: las HEIC de iPhone traen la imagen guardada "de costado" con un tag EXIF que indica cuánto rotarla al mostrarla, y `-strip` borra ese tag — sin `-auto-orient` primero, las 4 fotos se habrían guardado giradas 90°.
 
+## Video
+
+`assets/como-se-hace-una-tapioca.mp4` (sección "Cómo se hace" de `que-es-una-tapioca.dc.html`) llegó como un archivo de **42MB**: 1080×1920 (vertical, formato teléfono), H.264 a ~12.2 Mbps, 27.5s, con audio AAC. Insostenible para web. Quedó en **2.9MB (–93%)** así:
+
+```
+ffmpeg -i entrada.mp4 -vf "crop=1080:608:0:656,scale=960:540" \
+  -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p \
+  -c:a aac -b:a 96k -ac 2 -movflags +faststart salida.mp4
+```
+
+- **`crop=1080:608:0:656`** — el `<video>` vive en una caja `aspect-ratio:16/9` con `object-fit:cover`; el archivo original es vertical (9:16), así que el navegador ya iba a recortar el centro para llenar esa caja. En vez de dejar que ese recorte pase en el navegador (descargando los ~1312px de alto que nunca se ven), se recorta en el servidor a los mismos 1080×608 centrados que `object-fit:cover` habría mostrado — mismo resultado visual, una fracción de los bytes.
+- **`scale=960:540`** — el contenido nunca se muestra a más de `max-width:1120px`, así que 960px de ancho alcanza de sobra.
+- **`-crf 26 -preset slow`** — calidad constante orientada a tamaño (no a un bitrate fijo); `slow` gasta más tiempo de encode a cambio de mejor relación calidad/peso. Verificado visualmente extrayendo frames en varios segundos del clip (incluye un cartel con texto, legible sin artefactos).
+- **`-movflags +faststart`** — mueve el índice del MP4 (`moov atom`) al principio del archivo para que el video pueda empezar a reproducirse antes de descargarse completo (necesario para servir desde cualquier host estático, sin esto el navegador a veces debe bajar todo el archivo primero).
+- El audio original venía a 125kbps; bajó a 96kbps AAC estéreo, imperceptible en este contenido.
+
+También se generó `uploads/tapioca-video-poster.jpg` (68KB) — un frame del propio video ya recortado a 960×540, usado como `poster` del `<video>` para que se vea una miniatura real en vez de un cuadro negro antes de reproducir. De paso se sacó el overlay placeholder ("Video: assets/como-se-hace-una-tapioca.mp4" con ícono de play) que tapaba el video real una vez cargado — era un recordatorio visual del editor de diseño para cuando el slot estaba vacío, ya no aplica.
+
+FFmpeg tampoco estaba instalado (se agregó vía `winget install Gyan.FFmpeg`, mismo criterio que ImageMagick para las imágenes).
+
 ## Imágenes fuera de este objetivo (no tocadas)
 
 - `screenshots/*.png` (6 archivos, 24-32KB c/u): capturas de la propia herramienta de diseño, no referenciadas por ningún `.dc.html` — no forman parte de lo que se sirve al visitante.
@@ -56,9 +76,10 @@ Estos archivos **no están referenciados en ningún `.dc.html`** — no afectan 
 | `_unused/uploads/BEBIDAS A4 IMPRESION (1).png`, `(2).png`, `.jpg` | Variantes/duplicados del emblema; solo `uploads/BEBIDAS A4 IMPRESION.png` (sin sufijo) está en uso. |
 | `_unused/assets/menu-hero.png` | Versión original sin comprimir, reemplazada por `assets/menu-hero.jpg` (ver tabla arriba). |
 | `_unused/uploads/lolog (1-4).HEIC` | Originales sin comprimir de las fotos del FoodTruck Lolog, reemplazadas por `uploads/lolog-1.jpg` … `lolog-4.jpg` (ver tabla arriba). |
+| `_unused/assets/como_se_hace_una_tapioca.mp4` | Video original sin comprimir (42MB), reemplazado por `assets/como-se-hace-una-tapioca.mp4` (ver sección [Video](#video)). |
 
 No tocados (fuera del alcance de esta limpieza, no son imágenes): `uploads/menu.pdf`, `uploads/Menú • La Tapioquería.pdf`, `uploads/Menú • La Tapioquería-5e170f0a.pdf` — tres PDFs de la carta, tampoco referenciados en el sitio, aparentemente redundantes entre sí.
 
 ## Pendiente / fuera de alcance de esta tarea
 
-- Los 3 `<image-slot>` de `que-es-una-tapioca.dc.html` siguen vacíos (ver [PAGINAS.md](PAGINAS.md)) — cuando se carguen esas fotos, aplicar el mismo proceso de compresión antes de subirlas. Los 4 de `donde-encontrarnos.dc.html` ya se completaron (fotos del FoodTruck Lolog, 2026-08-06).
+- Los 3 `<image-slot>` de `que-es-una-tapioca.dc.html` siguen vacíos (ver [PAGINAS.md](PAGINAS.md)) — cuando se carguen esas fotos, aplicar el mismo proceso de compresión antes de subirlas. Los 4 de `donde-encontrarnos.dc.html` y el video de "Cómo se hace" ya se completaron (2026-08-06 y 2026-08-07 respectivamente).

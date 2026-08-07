@@ -16,11 +16,14 @@ Este repo arrancó como una exportación directa de la herramienta de diseño: i
 
 | Antes | Después |
 | --- | --- |
-| Imágenes del sitio pesaban hasta **3.5MB cada una** (~16.8MB en total) | Todas optimizadas a **≤100KB** (~1.06MB en total) → **‑94%** |
+| Imágenes del sitio pesaban hasta **3.5MB cada una** (~25.9MB en total) | Todas optimizadas a **≤100KB** (~1.44MB en total) → **‑94%** |
+| El video de "Cómo se hace" pesaba **42MB** (vertical, sin comprimir) | Recortado al encuadre real (16:9) y comprimido a **2.9MB** (‑93%), con poster propio |
 | Sin `<title>`, `meta description` ni Open Graph en ninguna página | Las 4 páginas con SEO on-page completo (`title`, `description`, `og:*`, `lang="es"`) |
 | Nombres de archivo con espacios y tildes (`"Donde encontrarnos.dc.html"`) | Kebab-case limpio (`donde-encontrarnos.dc.html`) — URLs estables y sin problemas de encoding |
 | El link **"← Volver"** apuntaba a un nombre de archivo con guion largo (`—`) que no coincidía con el archivo real | Corregido — el link funcionaba mal en las 3 subpáginas y nadie lo había notado |
-| ~14MB de imágenes huérfanas mezcladas con los assets reales del sitio | Archivadas en `_unused/` (fuera del repo, en `.gitignore`) |
+| Sin redes sociales ni contacto directo (solo un link de texto a Instagram en 2 de 4 páginas) | Instagram, Facebook y WhatsApp en el footer de las 4 páginas + botón flotante de WhatsApp |
+| Huecos de contenido: 7 `<image-slot>` vacíos y un `<video>` sin fuente | Las 4 fotos del FoodTruck Lolog y el video ya están cargados; quedan 3 slots en "Qué es una tapioca" |
+| ~14MB de archivos huérfanos mezclados con los assets reales del sitio | Archivados en `_unused/` (fuera del repo, en `.gitignore`) |
 | Sin repo, sin punto de entrada para hosting estático | Git inicializado + `index.html` + `robots.txt`, listo para desplegar en cualquier host estático |
 
 Detalle completo de cada punto en [`docs/`](docs/).
@@ -46,7 +49,7 @@ Páginas `.dc.html` (formato nativo de Claude Design): una etiqueta `<x-dc>` con
 
 - [`CLAUDE.md`](CLAUDE.md) — arquitectura del proyecto, convenciones, huecos de contenido conocidos.
 - [`docs/PAGINAS.md`](docs/PAGINAS.md) — contenido y estructura de cada página.
-- [`docs/IMAGENES.md`](docs/IMAGENES.md) — inventario de imágenes, método de optimización y resultados.
+- [`docs/IMAGENES.md`](docs/IMAGENES.md) — inventario de imágenes y video, método de optimización y resultados.
 - [`docs/DEPLOY.md`](docs/DEPLOY.md) — checklist de qué está listo para producción y qué falta definir (host, sitemap, canonical).
 
 ## 🚀 Correrlo local

@@ -31,7 +31,7 @@ Contexto detallado de cada `.dc.html`. Ver [../CLAUDE.md](../CLAUDE.md) para la 
 - **Hero**: mismo fondo compartido + ilustración `uploads/tapioca_dibujo.webp` con animación de "vapor" (SVG).
 - **Sección "La materia prima"**: explica que la tapioca es almidón de mandioca, sin gluten. 4 tarjetas destacadas (ingrediente / gluten / tiempo de cocción / rellenos).
 - **Sección "Origen"** (fondo verde oscuro): historia tupí-guaraní de la tapioca en Brasil.
-- **Sección "Cómo se hace"**: 3 pasos (hidratar y tamizar / sartén sin aceite / rellenar y doblar). Incluye un `<video>` que referencia `assets/como-se-hace-una-tapioca.mp4` (**archivo inexistente**, ver CLAUDE.md) y 3 `<image-slot>` vacíos ("tapioca-foto-1/2/3").
+- **Sección "Cómo se hace"**: 3 pasos (hidratar y tamizar / sartén sin aceite / rellenar y doblar). Incluye el video `assets/como-se-hace-una-tapioca.mp4` (con poster `uploads/tapioca-video-poster.jpg`, ver [IMAGENES.md](IMAGENES.md#video)) y 3 `<image-slot>` vacíos ("tapioca-foto-1/2/3").
 - **Sección "Resto · Bar"**: 4 fotos fijas de producto (`uploads/DSC_0056.jpg`, `DSC_0010.jpg`, `DSC_0025.jpg`, `DSC_0035.jpg`) con CTA "Ver el menú completo" → `menu.dc.html`.
 
 ## Elementos compartidos entre páginas
