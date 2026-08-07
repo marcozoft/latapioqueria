@@ -8,6 +8,8 @@ Cada página es un archivo `*.dc.html`. No es HTML plano: usa una etiqueta raíz
 
 `image-slot.js` define el custom element `<image-slot>`, un placeholder de imagen "soltar para completar" usado en canvas/mockup — en el sitio publicado, si un slot no tiene imagen cargada, no se ve nada útil (ver "Huecos de contenido" abajo).
 
+**Atributos booleanos (`controls`, `autoplay`, `muted`, `loop`, `disabled`, etc.) — nunca escribirlos "pelados".** El compilador parsea el HTML y convierte cada atributo en un prop de React; un atributo sin valor (`<video controls>`) parsea como `value=""`, y React puede tratar un string vacío como "false" para props booleanas de ese tipo — el atributo termina sin aplicarse, sin ningún error visible. Escribir siempre `controls="{{true}}"` (la sintaxis `{{...}}` evalúa la expresión y `resolve()` convierte el string `"true"` en el booleano real `true`). Mismo cuidado con nombres de prop en camelCase que no son válidos como atributo HTML (`autoPlay`, `playsInline`, `viewBox`, etc.): escribirlos tal cual en el HTML (`autoPlay="{{true}}"`) — el compilador tiene un paso previo (`sc-camel-`) que preserva la mayúscula intermedia a través del parseo HTML, que de otro modo la perdería (HTML no distingue mayúsculas en nombres de atributo). Ver el `<video>` de `que-es-una-tapioca.dc.html` como ejemplo de referencia.
+
 ## Estructura del proyecto
 
 ```

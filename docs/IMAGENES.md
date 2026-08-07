@@ -59,6 +59,8 @@ ffmpeg -i entrada.mp4 -vf "scale=720:1280" \
 
 También se generó `uploads/tapioca-video-poster.jpg` (88KB, 720×1280) — un frame del propio video, usado como `poster` del `<video>` para que se vea una miniatura real en vez de un cuadro negro antes de reproducir. De paso se sacó el overlay placeholder ("Video: assets/como-se-hace-una-tapioca.mp4" con ícono de play) que tapaba el video real una vez cargado — era un recordatorio visual del editor de diseño para cuando el slot estaba vacío, ya no aplica.
 
+El video autoreproduce en loop y silenciado (`autoPlay muted loop`, más `controls` para que se pueda pausar o activar el audio) — los navegadores bloquean el autoplay con sonido, por eso `muted` es obligatorio para que `autoPlay` funcione. Estos atributos booleanos están escritos como `controls="{{true}}"` (no `controls` pelado) por una particularidad del compilador de `.dc.html` — ver la nota en [../CLAUDE.md](../CLAUDE.md) antes de tocar este `<video>` o agregar otro.
+
 FFmpeg tampoco estaba instalado (se agregó vía `winget install Gyan.FFmpeg`, mismo criterio que ImageMagick para las imágenes).
 
 ## Imágenes fuera de este objetivo (no tocadas)
