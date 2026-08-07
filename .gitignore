@@ -1,0 +1,6 @@
+# Archivos huérfanos/sin optimizar, archivados fuera del sitio publicado (ver docs/IMAGENES.md)
+_unused/
+
+# Artefactos de SO
+Thumbs.db
+.DS_Store
