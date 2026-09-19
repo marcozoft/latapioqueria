@@ -1,0 +1,389 @@
+/* La Tapioquería — Dónde encontrarnos */
+
+@keyframes crossfade9 {
+  0% { opacity: 0; transform: scale(1.06); }
+  2.2% { opacity: 1; }
+  11.1% { opacity: 1; }
+  13.3% { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.01); }
+}
+
+@keyframes crossfade4 {
+  0% { opacity: 0; transform: scale(1.05); }
+  3% { opacity: 1; }
+  25% { opacity: 1; }
+  28% { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.01); }
+}
+
+.donde-page {
+  width: 100%;
+  font-family: var(--font-body);
+  color: var(--color-sage-dark2);
+}
+
+/* ---- Hero ---- */
+
+.donde-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(46svh, 400px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(70px, 10vw, 110px) clamp(20px, 6vw, 80px);
+  box-sizing: border-box;
+}
+
+.donde-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.donde-hero-bg--mobile { display: none; }
+
+@media (max-width: 640px) {
+  .donde-hero-bg--desktop { display: none; }
+  .donde-hero-bg--mobile { display: block; }
+}
+
+.donde-hero-plant {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(140px, 26vw, 280px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .donde-hero-plant { width: clamp(80px, 20vw, 150px); opacity: .8; }
+}
+
+.donde-hero-plant--left { left: 0; }
+.donde-hero-plant--right { right: 0; }
+
+.donde-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  animation: fadeUp .9s ease-out both;
+}
+
+.donde-hero-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1.1;
+  font-size: clamp(26px, 5vw, 50px);
+  color: var(--color-terracota);
+}
+
+.donde-hero-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.donde-hero-subtitle-line {
+  display: block;
+  width: clamp(18px, 5vw, 40px);
+  height: 2px;
+  background: var(--color-sage);
+}
+
+.donde-hero-subtitle-text {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 2vw, 18px);
+  color: var(--color-sage-dark);
+}
+
+/* ---- Secciones Resto Bar / FoodTruck (comparten estructura) ---- */
+
+.donde-section {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(46px, 7vw, 88px) clamp(20px, 5vw, 56px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.4vw, 40px);
+}
+
+.donde-section--dark {
+  max-width: none;
+  width: 100%;
+  padding: clamp(46px, 7vw, 88px) clamp(20px, 5vw, 56px);
+  box-sizing: border-box;
+  background: var(--color-sage-dark);
+  color: var(--color-cream-text);
+  overflow: hidden;
+}
+
+.donde-section--dark .donde-section-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.4vw, 40px);
+}
+
+.donde-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* ---- Layout de la sección FoodTruck (foto vertical al costado) ---- */
+
+.donde-foodtruck-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+}
+
+@media (min-width: 861px) {
+  .donde-foodtruck-layout {
+    grid-template-columns: 1.1fr minmax(300px, 380px);
+  }
+}
+
+.donde-foodtruck-info {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.4vw, 40px);
+}
+
+.donde-section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.donde-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: clamp(11px, 1.4vw, 13px);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+.donde-section-eyebrow--light { color: var(--color-terracota-mid); }
+.donde-section-eyebrow--dark { color: var(--color-orange-accent); }
+
+.donde-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.donde-step-num--1 { background: var(--color-terracota); color: var(--color-cream-text2); }
+.donde-step-num--2 { background: var(--color-orange-accent); color: var(--color-sage-dark); }
+
+.donde-section-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1;
+  font-size: clamp(28px, 5vw, 54px);
+}
+
+.donde-section-title--light { color: var(--color-sage-dark2); }
+.donde-section-title--dark { color: var(--color-cream-text); }
+
+.donde-section-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 38ch;
+}
+
+.donde-section-copy p {
+  margin: 0;
+  font-size: clamp(14px, 1.7vw, 17px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.donde-section-copy--light p { color: var(--color-text-green); }
+.donde-section-copy--dark p { color: rgba(247, 236, 216, .86); }
+
+.donde-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.donde-map-link--light { color: var(--color-terracota); }
+.donde-map-link--dark { color: var(--color-orange-accent); }
+
+/* ---- Galería crossfade — Resto Bar ---- */
+
+.donde-gallery {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: 70svh;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--color-brown-warm);
+  border: 1px solid rgba(34, 48, 26, .12);
+}
+
+.donde-gallery img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: crossfade9 36s ease-in-out infinite;
+}
+
+.donde-gallery-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(to top, rgba(29, 22, 16, .72), transparent);
+  pointer-events: none;
+}
+
+.donde-gallery-caption {
+  position: absolute;
+  left: clamp(18px, 3vw, 32px);
+  bottom: clamp(18px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.donde-gallery-caption-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: clamp(16px, 2.4vw, 26px);
+  color: var(--color-cream-text);
+}
+
+.donde-gallery-caption-sub {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: clamp(10px, 1.3vw, 13px);
+  color: rgba(247, 236, 216, .8);
+}
+
+/* ---- Galería crossfade vertical — FoodTruck Lolog ---- */
+
+.donde-gallery-vertical-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.donde-gallery-vertical {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 3 / 4;
+  border-radius: 32px;
+  overflow: hidden;
+  background: rgba(247, 236, 216, .06);
+  border: 1px solid rgba(247, 236, 216, .18);
+}
+
+.donde-gallery-vertical-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: crossfade4 24s ease-in-out infinite;
+}
+
+.donde-gallery-vertical-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Tarjetas de info ---- */
+
+.donde-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.donde-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 22px;
+  border-radius: 24px;
+}
+
+.donde-info-card--light {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(34, 48, 26, .10);
+}
+
+.donde-info-card--dark {
+  background: rgba(247, 236, 216, .08);
+  border: 1px solid rgba(247, 236, 216, .18);
+}
+
+.donde-info-label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.donde-info-card--light .donde-info-label { color: var(--color-terracota-mid); }
+.donde-info-card--dark .donde-info-label { color: var(--color-orange-accent); }
+
+.donde-info-value {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.donde-info-card--light .donde-info-value { color: var(--color-sage-dark2); }
+.donde-info-card--dark .donde-info-value { color: var(--color-cream-text); }

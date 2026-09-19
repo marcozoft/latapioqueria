@@ -1,0 +1,581 @@
+/* La Tapioquería — Carta */
+
+/* ---- Hero (portada, versión corta del hero de home) ---- */
+
+.menu-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(46svh, 400px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.menu-hero-bg--mobile { display: none; }
+
+@media (max-width: 640px) {
+  .menu-hero-bg--desktop { display: none; }
+  .menu-hero-bg--mobile { display: block; }
+}
+
+.menu-hero-plant {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(140px, 26vw, 280px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .menu-hero-plant { width: clamp(160px, 30vw, 260px); }
+}
+
+.menu-hero-plant--left { left: 0; }
+.menu-hero-plant--right { right: 0; }
+
+.menu-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.6vw, 16px);
+  padding: 4vh 8vw;
+  text-align: center;
+}
+
+.menu-hero-logo {
+  width: clamp(200px, 40vw, 420px);
+  height: auto;
+  filter: drop-shadow(0 3px 14px rgba(23, 17, 13, .15));
+}
+
+.menu-hero-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.menu-hero-subtitle-line {
+  display: block;
+  width: clamp(18px, 5vw, 40px);
+  height: 2px;
+  background: var(--color-sage);
+}
+
+.menu-hero-subtitle-text {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 2vw, 18px);
+  color: var(--color-sage-dark);
+}
+
+/* ---- Layout general ---- */
+
+.menu-page {
+  width: 100%;
+  font-family: var(--font-body);
+  color: var(--color-sage-dark2);
+}
+
+.menu-main {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(26px, 4vw, 44px) clamp(18px, 5vw, 56px) 0;
+  box-sizing: border-box;
+}
+
+.menu-section {
+  position: relative;
+  padding-bottom: clamp(34px, 5vw, 56px);
+}
+
+.menu-section-heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: clamp(24px, 3.6vw, 40px);
+}
+
+.menu-section-title {
+  display: inline-block;
+  margin: 0;
+  padding: 6px clamp(22px, 3vw, 38px);
+  border-radius: 10px;
+  background: var(--color-bg-card);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 1.15;
+  color: var(--color-sage-dark2);
+}
+
+.menu-section-heading .menu-section-title {
+  padding: 4px clamp(12px, 1.6vw, 18px);
+  border-radius: 8px;
+  font-size: clamp(18px, 2.2vw, 23px);
+  letter-spacing: .06em;
+}
+
+.menu-note {
+  margin: 0;
+  font-style: italic;
+  font-size: clamp(12px, 1.4vw, 14px);
+  color: rgba(61, 43, 29, .65);
+  text-align: center;
+}
+
+.menu-note--center { margin-top: 14px; }
+
+/* ---- Banner representativo de cada sección (foto + título superpuesto) ---- */
+
+.menu-section-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  max-height: 420px;
+  border-radius: 28px;
+  overflow: hidden;
+  margin-bottom: clamp(24px, 3.6vw, 40px);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 30px rgba(61, 43, 29, .24);
+}
+
+.menu-section-banner--tapiocas,
+.menu-section-banner--platos { background-image: url('../uploads/tapi_lomo.webp'); }
+
+.menu-section-banner--para-picar { background-image: url('../uploads/DSC_0025.jpg'); }
+.menu-section-banner--papas-fritas { background-image: url('../uploads/salchipapa.webp'); }
+.menu-section-banner--bebidas { background-image: url('../uploads/cerveza.webp'); }
+
+.menu-section-banner .menu-section-title {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* ---- Leyenda de íconos (arriba de la carta) ---- */
+
+.menu-legend {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 26px);
+  padding: 10px clamp(16px, 2.4vw, 26px);
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto clamp(22px, 3.4vw, 34px);
+  border: 1.5px solid var(--color-terracota);
+  border-radius: 14px;
+  background: rgba(247, 236, 216, .78);
+}
+
+.menu-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(11px, 1.4vw, 14px);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-text-brown);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .menu-legend {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(6px, 2.6vw, 14px);
+    padding: 8px 10px;
+    margin: 0 auto clamp(22px, 3.4vw, 34px);
+  }
+
+  .menu-legend-item {
+    gap: 4px;
+    font-size: clamp(8px, 2.5vw, 10.5px);
+  }
+
+  .menu-legend-item img,
+  .menu-legend-item svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* ---- Tabs Comidas / Bebidas ---- */
+
+.menu-tab-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: clamp(30px, 4.4vw, 48px);
+}
+
+@media (max-width: 640px) {
+  .menu-tabs-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    z-index: 35;
+    margin-bottom: 0;
+    padding: 8px;
+    border-radius: 999px;
+    background: rgba(247, 236, 216, .96);
+    box-shadow: 0 10px 26px rgba(61, 43, 29, .28);
+  }
+
+  .menu-main {
+    padding-bottom: 92px;
+  }
+}
+
+.menu-tab-btn {
+  cursor: pointer;
+  padding: 10px clamp(22px, 4vw, 34px);
+  border-radius: 999px;
+  border: 1.5px solid var(--color-terracota);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: var(--color-terracota);
+  background: transparent;
+  transition: background .2s ease, color .2s ease;
+  user-select: none;
+}
+
+.menu-tab-panel { display: none; }
+
+#tab-comidas:checked ~ .menu-tabs-nav label[for="tab-comidas"],
+#tab-bebidas:checked ~ .menu-tabs-nav label[for="tab-bebidas"] {
+  background: var(--color-terracota);
+  color: var(--color-cream-text2);
+}
+
+#tab-comidas:checked ~ .menu-tab-panel--comidas,
+#tab-bebidas:checked ~ .menu-tab-panel--bebidas {
+  display: block;
+}
+
+/* ---- Grillas de platos ---- */
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  gap: clamp(22px, 3vw, 40px);
+  align-items: start;
+}
+
+.menu-grid--narrow {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.menu-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 2px dotted #cf7a4a;
+}
+
+.menu-col > .menu-item:last-child,
+.menu-list--single > .menu-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.menu-item-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  font-size: clamp(15px, 1.7vw, 18px);
+  color: var(--color-sage-dark2);
+}
+
+.menu-item-price {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(15px, 1.7vw, 18px);
+  color: var(--color-sage-dark2);
+  white-space: nowrap;
+}
+
+.menu-item-desc {
+  margin: 0;
+  font-style: italic;
+  font-size: clamp(12.5px, 1.4vw, 14.5px);
+  line-height: 1.45;
+  color: var(--color-text-green);
+}
+
+.menu-item-desc strong {
+  font-weight: 600;
+  color: var(--color-sage-dark2);
+}
+
+/* ---- Sección "Platos" (ítems más grandes, lista única) ---- */
+
+.menu-list--single {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.menu-list--single .menu-item {
+  padding-bottom: 18px;
+}
+
+.menu-item--lg .menu-item-name,
+.menu-item--lg .menu-item-price {
+  font-size: clamp(16px, 2vw, 21px);
+}
+
+.menu-item--lg .menu-item-desc {
+  font-size: clamp(13px, 1.5vw, 15.5px);
+  line-height: 1.5;
+}
+
+/* ---- Listas simples y centradas (cervezas, sidras, etc.) ---- */
+
+.menu-simple-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.menu-simple-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  font-size: clamp(15px, 1.7vw, 18px);
+  color: var(--color-sage-dark2);
+  padding-bottom: 10px;
+  border-bottom: 2px dotted #cf7a4a;
+}
+
+.menu-simple-list > .menu-simple-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.menu-inline-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* ---- Sub-listas con viñetas (dentro de un item, o independientes) ---- */
+
+.menu-sublist {
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-sublist li {
+  position: relative;
+  padding-left: 14px;
+  font-style: italic;
+  font-size: clamp(12.5px, 1.4vw, 14.5px);
+  color: var(--color-text-green);
+}
+
+.menu-sublist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+}
+
+.menu-sublist--wine {
+  max-width: 320px;
+  margin: 0 auto;
+  gap: 8px;
+}
+
+.menu-sublist--wine li {
+  padding-left: 16px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: var(--color-sage-dark2);
+}
+
+/* ---- Panel Bebidas: todo alineado a la izquierda (no centrado) ---- */
+
+.menu-tab-panel--bebidas .menu-section-heading {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.menu-tab-panel--bebidas .menu-note {
+  text-align: left;
+}
+
+.menu-tab-panel--bebidas .menu-grid--narrow {
+  margin: 0;
+}
+
+.menu-tab-panel--bebidas .menu-simple-list {
+  align-items: flex-start;
+  margin: 0;
+}
+
+.menu-tab-panel--bebidas .menu-simple-item {
+  justify-content: flex-start;
+}
+
+.menu-tab-panel--bebidas .menu-sublist--wine {
+  margin: 0;
+}
+
+/* ---- Botón "ver foto" + lightbox de un plato ---- */
+
+.menu-photo-btn {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-photo-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.photo-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.photo-toggle:checked + .photo-modal {
+  display: flex;
+}
+
+.photo-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 17, 13, .78);
+  cursor: pointer;
+}
+
+.photo-modal-box {
+  position: relative;
+  max-width: min(90vw, 640px);
+  max-height: 85vh;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+
+.photo-modal-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  background: var(--color-dark-brown);
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(23, 17, 13, .6);
+  color: var(--color-cream-text2);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}

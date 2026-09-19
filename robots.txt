@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://latapioqueria.com.ar/sitemap.xml

@@ -1,0 +1,272 @@
+/* La Tapioquería — estilos base compartidos por todas las páginas */
+
+:root {
+  --color-bg-cream: #f0e2c6;
+  --color-bg-cream2: #f2e5cf;
+  --color-bg-card: #f7ecd8;
+  --color-dark-brown: #17110d;
+  --color-dark-brown2: #1d1610;
+  --color-brown-warm: #241a12;
+  --color-terracota: #c1502e;
+  --color-terracota-dark: #8c491a;
+  --color-terracota-mid: #b2622d;
+  --color-sage: #56633f;
+  --color-sage-dark: #33361f;
+  --color-sage-dark2: #22301a;
+  --color-text-brown: #3d2b1d;
+  --color-text-green: #3f4a2c;
+  --color-cream-text: #f7ecd8;
+  --color-cream-text2: #fdf1e0;
+  --color-orange-accent: #e08a4a;
+  --color-whatsapp: #25d366;
+  --font-heading: 'Oswald', sans-serif;
+  --font-title: 'Figtree', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background:
+    linear-gradient(rgba(242, 229, 207, .8), rgba(242, 229, 207, .8)),
+    url('../assets/mural/mural_sombra.webp') center / cover no-repeat fixed;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-terracota);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-terracota-dark);
+}
+
+/* Visualmente oculto pero legible por lectores de pantalla y buscadores (encabezados semánticos que no llevan un diseño visible propio) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Botón flotante de WhatsApp */
+.wa-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--color-whatsapp);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wa-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .45);
+}
+
+/* Link "← Volver" sobre el hero de las subpáginas */
+.back-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: rgba(240, 226, 198, .9);
+  color: var(--color-text-brown);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: background .2s ease;
+}
+
+.back-link:hover {
+  background: #fff7e8;
+}
+
+/* Iconos redondos de redes sociales del footer */
+.social-row {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.social-icon:hover {
+  background: var(--color-terracota-dark);
+  transform: translateY(-2px);
+}
+
+/* Fondo tipo mural (igual que el hero, más tenue) del footer */
+.footer-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.footer-plant {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(120px, 20vw, 240px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .footer-plant { width: clamp(150px, 26vw, 220px); }
+}
+
+.footer-plant--left { left: 0; }
+.footer-plant--right { right: 0; }
+
+.footer-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(242, 229, 207, .62);
+  pointer-events: none;
+}
+
+/* Cartelitos con forma de mancha (SVG) del footer: gluten/vegano y nombre */
+.footer-ribbon {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-ribbon svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.footer-ribbon--gluten {
+  width: min(680px, 74%);
+  padding: clamp(22px, 3.4vw, 32px) clamp(34px, 6vw, 64px);
+}
+
+.footer-ribbon--brand {
+  width: min(700px, 76%);
+  padding: clamp(30px, 5vw, 52px) clamp(30px, 6vw, 70px);
+}
+
+.footer-ribbon-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-ribbon--brand .footer-ribbon-content {
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-gluten-line {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: clamp(13px, 2vw, 20px);
+  color: var(--color-bg-cream2);
+}
+
+.footer-gluten-line--accent {
+  color: var(--color-orange-accent);
+}
+
+.footer-brand-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: clamp(24px, 4.6vw, 44px);
+  line-height: 1;
+  color: var(--color-cream-text2);
+}
+
+.footer-brand-address {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: clamp(11px, 1.8vw, 17px);
+  color: rgba(253, 241, 224, .92);
+}
+
+.site-footer {
+  position: relative;
+  width: 100%;
+  background: var(--color-bg-cream2);
+  padding: clamp(34px, 5vw, 60px) clamp(18px, 5vw, 64px) clamp(34px, 5vw, 56px);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vw, 30px);
+}
+
+/* Firma del desarrollador */
+.site-signature {
+  width: 100%;
+  background: var(--color-dark-brown);
+}
+
+.site-signature iframe {
+  display: block;
+  border: 0;
+}

@@ -1,0 +1,545 @@
+/* La Tapioquería — ¿Qué es una tapioca? */
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(6px) scaleY(.92); }
+  25% { opacity: .55; }
+  60% { opacity: .35; }
+  100% { opacity: 0; transform: translateY(-10px) scaleY(1.06); }
+}
+
+.tapioca-page {
+  width: 100%;
+  font-family: var(--font-body);
+  color: var(--color-sage-dark2);
+}
+
+/* ---- Hero ---- */
+
+.tapioca-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(46svh, 400px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 3vh, 28px) clamp(20px, 6vw, 80px);
+  box-sizing: border-box;
+}
+
+.tapioca-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.tapioca-hero-bg--mobile { display: none; }
+
+@media (max-width: 640px) {
+  .tapioca-hero-bg--desktop { display: none; }
+  .tapioca-hero-bg--mobile { display: block; }
+}
+
+.tapioca-hero-plant {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(140px, 26vw, 280px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .tapioca-hero-plant { width: clamp(80px, 20vw, 150px); opacity: .8; }
+}
+
+.tapioca-hero-plant--left { left: 0; }
+.tapioca-hero-plant--right { right: 0; }
+
+.tapioca-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 14px);
+  text-align: center;
+  animation: fadeUp .9s ease-out both;
+}
+
+.tapioca-illustration-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(85px, 9vw, 110px);
+}
+
+.tapioca-steam {
+  width: 44%;
+  height: auto;
+  margin-bottom: -4px;
+  overflow: visible;
+}
+
+.tapioca-steam path:nth-child(1) { animation: steam 4.6s ease-in-out infinite; }
+.tapioca-steam path:nth-child(2) { animation: steam 4.6s ease-in-out .9s infinite; }
+.tapioca-steam path:nth-child(3) { animation: steam 4.6s ease-in-out 1.8s infinite; }
+
+.tapioca-illustration {
+  width: 100%;
+  height: auto;
+  animation: floatY 7s ease-in-out infinite;
+}
+
+.tapioca-hero-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1.1;
+  font-size: clamp(26px, 5vw, 50px);
+  color: var(--color-terracota);
+}
+
+.tapioca-hero-desc {
+  margin: 0;
+  max-width: 42ch;
+  font-weight: 300;
+  font-size: clamp(14px, 1.9vw, 19px);
+  line-height: 1.6;
+  color: rgba(61, 43, 29, .72);
+  text-wrap: pretty;
+}
+
+/* ---- Sección "La materia prima" ---- */
+
+.tapioca-intro {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 90px) clamp(20px, 5vw, 56px);
+  padding-bottom: clamp(170px, 24vw, 260px);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.tapioca-mandioca-bg {
+  position: absolute;
+  right: clamp(4px, 2vw, 24px);
+  bottom: 0;
+  z-index: 0;
+  width: clamp(190px, 24vw, 320px);
+  height: auto;
+  pointer-events: none;
+}
+
+.tapioca-intro-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: clamp(11px, 1.4vw, 13px);
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--color-terracota-mid);
+}
+
+.eyebrow--dark {
+  color: var(--color-orange-accent);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.05;
+  font-size: clamp(28px, 4.6vw, 48px);
+  color: var(--color-sage-dark2);
+}
+
+.section-title--light {
+  color: var(--color-cream-text);
+}
+
+.tapioca-intro-text p {
+  margin: 0;
+  font-size: clamp(14px, 1.7vw, 17px);
+  line-height: 1.65;
+  color: var(--color-text-green);
+  text-wrap: pretty;
+}
+
+.stat-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border-radius: 26px;
+}
+
+.stat-card--cream {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(34, 48, 26, .10);
+}
+
+.stat-card--sage {
+  background: var(--color-sage-dark);
+  border: 1px solid rgba(34, 48, 26, .2);
+  color: var(--color-cream-text);
+}
+
+.stat-card--terracota {
+  background: var(--color-terracota);
+  border: 1px solid rgba(140, 73, 26, .35);
+  color: var(--color-cream-text2);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1;
+}
+
+.stat-card--cream .stat-number { color: var(--color-terracota); }
+.stat-card--sage .stat-number { color: var(--color-orange-accent); }
+.stat-card--cream .stat-number--sage-accent { color: var(--color-sage); }
+
+.stat-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: 13px;
+}
+
+.stat-card--cream .stat-label,
+.stat-card--cream .stat-desc { color: var(--color-sage-dark2); }
+
+.stat-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.stat-card--sage .stat-desc { color: rgba(247, 236, 216, .8); }
+.stat-card--terracota .stat-desc { color: rgba(253, 241, 224, .85); }
+.stat-card--cream .stat-desc { color: var(--color-text-green); }
+
+/* ---- Sección "Origen" ---- */
+
+.tapioca-origen {
+  position: relative;
+  width: 100%;
+  background: var(--color-sage-dark);
+  color: var(--color-cream-text);
+  padding: clamp(48px, 7vw, 90px) clamp(20px, 5vw, 56px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tapioca-origen-inner {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "heading"
+    "text"
+    "flag";
+  gap: clamp(22px, 3vw, 36px);
+  align-items: start;
+}
+
+@media (min-width: 861px) {
+  .tapioca-origen-inner {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "heading flag"
+      "text flag";
+  }
+}
+
+.tapioca-origen-heading {
+  grid-area: heading;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 60ch;
+}
+
+.tapioca-origen-flag {
+  grid-area: flag;
+  justify-self: center;
+  align-self: start;
+  width: clamp(140px, 30vw, 320px);
+  height: auto;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .3));
+}
+
+.tapioca-origen-grid {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tapioca-origen-grid p {
+  margin: 0;
+  font-size: clamp(14px, 1.7vw, 17px);
+  line-height: 1.7;
+  color: rgba(247, 236, 216, .86);
+  text-wrap: pretty;
+}
+
+/* ---- Sección "Cómo se hace" ---- */
+
+.tapioca-steps {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 90px) clamp(20px, 5vw, 56px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.tapioca-steps-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.tapioca-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(18px, 2.6vw, 30px);
+}
+
+.step-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px;
+  border-radius: 28px;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(34, 48, 26, .10);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+  color: var(--color-cream-text2);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.step-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--color-sage-dark2);
+}
+
+.step-desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--color-text-green);
+}
+
+/* ---- Video ---- */
+
+.tapioca-video-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tapioca-video-frame {
+  position: relative;
+  width: min(100%, 400px);
+  aspect-ratio: 9 / 16;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--color-brown-warm);
+  border: 1px solid rgba(34, 48, 26, .14);
+}
+
+.tapioca-video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--color-brown-warm);
+}
+
+.tapioca-video-caption {
+  font-size: 13px;
+  color: rgba(63, 74, 44, .72);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ---- Sección "Resto · Bar" ---- */
+
+.tapioca-restobar {
+  position: relative;
+  width: 100%;
+  background: var(--color-bg-card);
+  padding: clamp(48px, 7vw, 90px) clamp(20px, 5vw, 56px);
+  box-sizing: border-box;
+}
+
+.tapioca-restobar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.6vw, 42px);
+}
+
+.tapioca-restobar-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tapioca-restobar-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tapioca-restobar-heading .section-title {
+  font-size: clamp(30px, 5.4vw, 58px);
+}
+
+.tapioca-restobar-desc {
+  margin: 0;
+  max-width: 40ch;
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.6;
+  color: var(--color-text-green);
+  text-wrap: pretty;
+}
+
+.tapioca-restobar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(10px, 1.6vw, 22px);
+}
+
+.tapioca-restobar-grid figure {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tapioca-restobar-grid figure:hover {
+  z-index: 2;
+}
+
+.tapioca-restobar-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 26px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.tapioca-restobar-grid figure:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 16px 32px rgba(61, 43, 29, .32);
+}
+
+@media (max-width: 700px) {
+  .tapioca-restobar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+.tapioca-restobar-grid figcaption {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--color-text-green);
+}
+
+.tapioca-cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 34px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+  color: var(--color-cream-text2);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: clamp(13px, 1.6vw, 15px);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.cta-button:hover {
+  background: var(--color-terracota-mid);
+  transform: translateY(-2px);
+}

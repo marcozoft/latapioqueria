@@ -6,11 +6,9 @@ Objetivo: toda imagen servida por el sitio pesa **≤100KB** para priorizar velo
 
 | Archivo | Página(s) | Uso | Antes | Después |
 | --- | --- | --- | --- | --- |
-| `assets/menu-hero.jpg` *(antes `.png`)* | Menu | Fondo header carta | 3520KB | 96KB |
-| `uploads/fondo_principal_tapio_h.webp` | Home, Donde encontrarnos, Que es una tapioca | Fondo hero compartido | 768KB | 92KB |
-| `uploads/fondo_tapio_inf_der.webp` | Home, Menu, Donde encontrarnos, Que es una tapioca | Decoración footer (der.) | 248KB | 36KB |
-| `uploads/fondo_tapio_inf_izq.webp` | Home, Menu, Donde encontrarnos, Que es una tapioca | Decoración footer (izq.) | 168KB | 32KB |
-| `uploads/BEBIDAS A4 IMPRESION.png` | Home | Emblema circular hero | 80KB | 80KB *(ya estaba bajo el objetivo, sin cambios)* |
+| `assets/mural/mural_sombra.webp` / `mural_sombra_mb.webp` | Home, Menu, Donde encontrarnos, Que es una tapioca | Fondo de los 4 heros (mural) | — | 18KB / 30KB |
+| `assets/mural/mural_sombra2.webp` | Home, Menu, Donde encontrarnos, Que es una tapioca | Fondo footer (mural) | — | 38KB |
+| `assets/mural/mural_centro.webp` / `mural_derecho.webp` | Los 4 heros + los 4 footers (más chicas) | Plantas del mural a los costados | — | 61KB / 55KB |
 | `uploads/tapioca_dibujo.webp` | Que es una tapioca | Ilustración hero | 32KB | 32KB *(ya estaba bajo el objetivo, sin cambios)* |
 | `uploads/DSC_0010.jpg` | Que es una tapioca | Foto "Torrejitas de cebolla" | 1684KB | 96KB |
 | `uploads/DSC_0025.jpg` | Que es una tapioca | Foto "Coliflor manchurian" | 1408KB | 96KB |
@@ -35,7 +33,7 @@ magick entrada.jpg -strip -resize "1400x1400>" -sampling-factor 4:2:0 -define jp
 
 Para WebP (fondos/decoración), `jpeg:extent` no aplica — el ajuste de tamaño se hizo a mano probando `-quality` (70-72 dio buen equilibrio calidad/peso para el fondo hero) más `-resize`.
 
-`assets/menu-hero.png` se convirtió a `.jpg` (y se actualizó la referencia en `menu.dc.html`) porque era una fotografía opaca sin transparencia real (`%[opaque]=True` pese a tener canal alfa) — PNG es un formato pobre para fotos comprimidas a ≤100KB manteniendo calidad aceptable; JPEG rinde muchísimo mejor ahí. El resto de los `.png`/`.webp` se mantuvo en su formato original porque ya cumplía el objetivo o transportaba transparencia real usada en el diseño.
+`assets/menu-hero.png` se convirtió a `.jpg` (y se actualizó la referencia en `menu.html`) porque era una fotografía opaca sin transparencia real (`%[opaque]=True` pese a tener canal alfa) — PNG es un formato pobre para fotos comprimidas a ≤100KB manteniendo calidad aceptable; JPEG rinde muchísimo mejor ahí. El resto de los `.png`/`.webp` se mantuvo en su formato original porque ya cumplía el objetivo o transportaba transparencia real usada en el diseño.
 
 Antes de instalar ImageMagick se comprobó que PowerShell/`System.Drawing` (.NET) no puede decodificar `.webp` — de ahí la necesidad de instalar una herramienta externa.
 
@@ -43,7 +41,7 @@ Las 4 fotos del FoodTruck Lolog llegaron como `.HEIC` (formato nativo de iPhone)
 
 ## Video
 
-`assets/como-se-hace-una-tapioca.mp4` (sección "Cómo se hace" de `que-es-una-tapioca.dc.html`) llegó como un archivo de **42MB**: 1080×1920 (vertical, formato teléfono), H.264 a ~12.2 Mbps, 27.5s, con audio AAC. Insostenible para web. Quedó en **4.1MB (–90%)** así:
+`assets/como-se-hace-una-tapioca.mp4` (sección "Cómo se hace" de `que-es-una-tapioca.html`) llegó como un archivo de **42MB**: 1080×1920 (vertical, formato teléfono), H.264 a ~12.2 Mbps, 27.5s, con audio AAC. Insostenible para web. Quedó en **4.1MB (–90%)** así:
 
 ```
 ffmpeg -i entrada.mp4 -vf "scale=720:1280" \
@@ -51,7 +49,7 @@ ffmpeg -i entrada.mp4 -vf "scale=720:1280" \
   -c:a aac -b:a 96k -ac 2 -movflags +faststart salida.mp4
 ```
 
-- **Se mantiene el formato vertical original** (9:16) — la primera versión lo recortaba a 16:9 para que coincidiera con una caja horizontal, pero eso rompía el encuadre pensado por quien filmó el video. El contenedor en `que-es-una-tapioca.dc.html` se adaptó al video en vez de al revés: `aspect-ratio:9/16` con `width:min(100%,400px)`, centrado — mismo patrón que la galería vertical del FoodTruck Lolog en `donde-encontrarnos.dc.html`.
+- **Se mantiene el formato vertical original** (9:16) — la primera versión lo recortaba a 16:9 para que coincidiera con una caja horizontal, pero eso rompía el encuadre pensado por quien filmó el video. El contenedor en `que-es-una-tapioca.html` se adaptó al video en vez de al revés: `aspect-ratio:9/16` con `width:min(100%,400px)`, centrado — mismo patrón que la galería vertical del FoodTruck Lolog en `donde-encontrarnos.html`.
 - **`scale=720:1280`** — el contenido nunca se muestra a más de 400px de ancho en CSS (~800px a 2x retina), así que 720px de ancho alcanza de sobra sin perder nitidez; se preserva la proporción 9:16 exacta del original, sin distorsión.
 - **`-crf 26 -preset slow`** — calidad constante orientada a tamaño (no a un bitrate fijo); `slow` gasta más tiempo de encode a cambio de mejor relación calidad/peso. Verificado visualmente extrayendo frames en varios segundos del clip (incluye un cartel con texto, legible sin artefactos).
 - **`-movflags +faststart`** — mueve el índice del MP4 (`moov atom`) al principio del archivo para que el video pueda empezar a reproducirse antes de descargarse completo (necesario para servir desde cualquier host estático, sin esto el navegador a veces debe bajar todo el archivo primero).
@@ -59,29 +57,46 @@ ffmpeg -i entrada.mp4 -vf "scale=720:1280" \
 
 También se generó `uploads/tapioca-video-poster.jpg` (88KB, 720×1280) — un frame del propio video, usado como `poster` del `<video>` para que se vea una miniatura real en vez de un cuadro negro antes de reproducir. De paso se sacó el overlay placeholder ("Video: assets/como-se-hace-una-tapioca.mp4" con ícono de play) que tapaba el video real una vez cargado — era un recordatorio visual del editor de diseño para cuando el slot estaba vacío, ya no aplica.
 
-El video autoreproduce en loop y silenciado (`autoPlay muted loop`, más `controls` para que se pueda pausar o activar el audio) — los navegadores bloquean el autoplay con sonido, por eso `muted` es obligatorio para que `autoPlay` funcione. Estos atributos booleanos están escritos como `controls="{{true}}"` (no `controls` pelado) por una particularidad del compilador de `.dc.html` — ver la nota en [../CLAUDE.md](../CLAUDE.md) antes de tocar este `<video>` o agregar otro.
+El video autoreproduce en loop y silenciado (`autoplay muted loop`, más `controls` para que se pueda pausar o activar el audio) — los navegadores bloquean el autoplay con sonido, por eso `muted` es obligatorio para que `autoplay` funcione. Son atributos booleanos HTML estándar (`<video controls autoplay muted loop playsinline>`), sin ninguna sintaxis especial.
 
 FFmpeg tampoco estaba instalado (se agregó vía `winget install Gyan.FFmpeg`, mismo criterio que ImageMagick para las imágenes).
 
 ## Imágenes fuera de este objetivo (no tocadas)
 
-- `screenshots/*.png` (6 archivos, 24-32KB c/u): capturas de la propia herramienta de diseño, no referenciadas por ningún `.dc.html` — no forman parte de lo que se sirve al visitante.
+- `screenshots/*.png` (6 archivos, 24-32KB c/u): capturas de la propia herramienta de diseño, no referenciadas por ninguna página — no forman parte de lo que se sirve al visitante.
 
 ## Archivos huérfanos archivados en `_unused/`
 
-Estos archivos **no están referenciados en ningún `.dc.html`** — no afectan el sitio publicado ni el SEO, pero se movieron fuera de `uploads/`/`assets/` para no confundirlos con los activos reales del sitio. Se conservan por si sirven de respaldo/fuente:
+Estos archivos **no están referenciados en ninguna página** — no afectan el sitio publicado ni el SEO, pero se movieron fuera de `uploads/`/`assets/` para no confundirlos con los activos reales del sitio. Se conservan por si sirven de respaldo/fuente:
 
 | Archivo | Motivo |
 | --- | --- |
-| `_unused/menu_pages/p1_1.png` … `p4_4.png` (4 archivos, ~13.4MB) | Parecen ser páginas del PDF de la carta exportadas a imagen; sin uso en el sitio (la carta vive como HTML en `menu.dc.html`). |
+| `_unused/menu_pages/p1_1.png` … `p4_4.png` (4 archivos, ~13.4MB) | Parecen ser páginas del PDF de la carta exportadas a imagen; sin uso en el sitio (la carta vive como HTML en `menu.html`). |
 | `_unused/uploads/pasted-1786058049081-0.png` | Imagen pegada sin uso identificado. |
-| `_unused/uploads/BEBIDAS A4 IMPRESION (1).png`, `(2).png`, `.jpg` | Variantes/duplicados del emblema; solo `uploads/BEBIDAS A4 IMPRESION.png` (sin sufijo) está en uso. |
+| `_unused/uploads/BEBIDAS A4 IMPRESION.png`, `(1).png`, `(2).png`, `.jpg` | Escaneo de la carta de bebidas impresa; se usó como `og:image` de Home y Menú hasta el 2026-09-18, cuando se reemplazó por `uploads/tapi_lomo.webp` (foto real del plato en vez de un escaneo) — quedó sin ningún uso en el sitio. |
 | `_unused/assets/menu-hero.png` | Versión original sin comprimir, reemplazada por `assets/menu-hero.jpg` (ver tabla arriba). |
 | `_unused/uploads/lolog (1-4).HEIC` | Originales sin comprimir de las fotos del FoodTruck Lolog, reemplazadas por `uploads/lolog-1.jpg` … `lolog-4.jpg` (ver tabla arriba). |
 | `_unused/assets/como_se_hace_una_tapioca.mp4` | Video original sin comprimir (42MB), reemplazado por `assets/como-se-hace-una-tapioca.mp4` (ver sección [Video](#video)). |
+| `_unused/uploads/fondo_tapio_inf_der.webp`, `fondo_tapio_inf_izq.webp` | Decoración de footer anterior; el footer ahora usa el mismo mural que el hero (`assets/mural/mural_sombra2.webp` + `mural_centro.webp`/`mural_derecho.webp`, ver tabla arriba). |
+| `_unused/uploads/fondo_principal_tapio_h.webp` | Fondo anterior (foto oscurecida) de los heros de Donde encontrarnos y Que es una tapioca; ambos pasaron a usar el mismo mural que el hero de Home/Menu (ver tabla arriba). |
+| `_unused/assets/menu-hero.jpg` | Fondo anterior del header de Menu, de cuando esa página tenía un header con foto propia en vez del hero tipo mural que comparte con el resto del sitio. |
+| `_unused/assets/702142585…jpg`, `702179465…jpg`, `702676893…jpg`, `704467917…jpg`, `704565057…jpg` (5 archivos) | Fotos exportadas de Instagram (nombres de archivo típicos de esa plataforma), sin uso en ninguna página — quedaron sueltas en `assets/`. |
+| `_unused/assets/Gemini_Generated_Image_*.jpg` (2 archivos) | Imágenes generadas con IA, sin uso en ninguna página. |
+| `_unused/assets/fondo_hero_mural.png`, `.webp` | Candidatos de fondo de hero de una iteración anterior; el hero terminó usando `assets/mural/mural_sombra.webp` en su lugar. |
+| `_unused/uploads/DSC_0043.jpg` | Foto de producto sin uso identificado en ninguna página. |
+| `_unused/uploads/salchipapa.jpg` | Versión sin optimizar de la foto de Salchipapa; el sitio usa `uploads/salchipapa.webp`. |
+| `_unused/assets/mural/mural_sombra.png` (1.4MB), `mural_sombra2.png` (1.6MB) | Originales sin comprimir del mural usado en los heros/footer; el sitio usa `assets/mural/mural_sombra.webp` / `mural_sombra2.webp` (18-38KB). |
 
 No tocados (fuera del alcance de esta limpieza, no son imágenes): `uploads/menu.pdf`, `uploads/Menú • La Tapioquería.pdf`, `uploads/Menú • La Tapioquería-5e170f0a.pdf` — tres PDFs de la carta, tampoco referenciados en el sitio, aparentemente redundantes entre sí.
 
+## Favicon / ícono de la app (agregado 2026-09-18)
+
+El sitio no tenía favicon (404 en las 4 páginas, confirmado con Playwright). Se creó `assets/favicon.svg` (monograma "T" en terracota sobre círculo, dibujado a mano en SVG — no hay un isotipo/marca cuadrada real todavía, así que esto es un placeholder de marca hasta que el dueño del sitio provea un logo isotipo propio) y sus variantes rasterizadas (generadas con Playwright, sirviendo el SVG por HTTP — cargarlo por `file://` da un ícono roto en el navegador sandboxeado, ver nota en el propio proceso si hay que regenerarlas): `assets/favicon-32.png`, `assets/apple-touch-icon.png` (180×180, fondo crema opaco en vez de transparente porque iOS rellena de negro el canal alfa), `assets/icon-192.png` y `assets/icon-512.png`. `site.webmanifest` en la raíz referencia los dos últimos.
+
+## Compresión de imágenes en `<img>` (agregado 2026-09-18)
+
+Las imágenes que están fuera del viewport inicial (galerías de `donde-encontrarnos.html`, fotos de Resto·Bar y del lightbox de `menu.html`, footer de las 4 páginas) tienen `loading="lazy"`. Las imágenes del hero de cada página (mural + plantas) se dejaron sin ese atributo a propósito, porque son la imagen LCP (Largest Contentful Paint) y lazy-loadearla empeoraría esa métrica en vez de mejorarla.
+
 ## Pendiente / fuera de alcance de esta tarea
 
-- Los 3 `<image-slot>` de `que-es-una-tapioca.dc.html` siguen vacíos (ver [PAGINAS.md](PAGINAS.md)) — cuando se carguen esas fotos, aplicar el mismo proceso de compresión antes de subirlas. Los 4 de `donde-encontrarnos.dc.html` y el video de "Cómo se hace" ya se completaron (2026-08-06 y 2026-08-07 respectivamente).
+- La sección de 3 fotos placeholder que tenía `que-es-una-tapioca.html` se quitó (2026-09-18, a pedido del dueño del sitio, en vez de completarla con fotos reales). La galería de `donde-encontrarnos.html` y el video de "Cómo se hace" ya se completaron (2026-08-06 y 2026-08-07 respectivamente).
