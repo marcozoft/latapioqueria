@@ -152,17 +152,28 @@
 .menu-section-banner {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
   width: 100%;
   aspect-ratio: 5 / 4;
   max-height: 420px;
+  padding: clamp(18px, 3vw, 32px);
+  box-sizing: border-box;
   border-radius: 28px;
   overflow: hidden;
   margin-bottom: clamp(24px, 3.6vw, 40px);
   background-size: cover;
   background-position: center;
   box-shadow: 0 12px 30px rgba(61, 43, 29, .24);
+}
+
+.menu-section-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to top, rgba(23, 17, 13, .68) 0%, rgba(23, 17, 13, .32) 32%, rgba(23, 17, 13, 0) 60%);
+  pointer-events: none;
 }
 
 .menu-section-banner--tapiocas,
@@ -174,7 +185,14 @@
 
 .menu-section-banner .menu-section-title {
   position: relative;
+  z-index: 1;
   white-space: nowrap;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--color-cream-text2);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .45);
 }
 
 /* ---- Leyenda de íconos (arriba de la carta) ---- */
