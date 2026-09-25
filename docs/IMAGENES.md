@@ -11,7 +11,7 @@ Objetivo: toda imagen servida por el sitio pesa **≤100KB** para priorizar velo
 | `assets/mural/mural_centro.webp` / `mural_derecho.webp` | Los 4 heros + los 4 footers (más chicas) | Plantas del mural a los costados | — | 61KB / 55KB |
 | `uploads/tapioca_dibujo.webp` | Que es una tapioca | Ilustración hero | 32KB | 32KB *(ya estaba bajo el objetivo, sin cambios)* |
 | `uploads/DSC_0010.jpg` | Que es una tapioca | Foto "Torrejitas de cebolla" | 1684KB | 96KB |
-| `uploads/DSC_0025.jpg` | Que es una tapioca | Foto "Coliflor manchurian" | 1408KB | 96KB |
+| `uploads/coliflor.webp` | Que es una tapioca | Foto "Coliflor manchurian" | 1408KB | 96KB |
 | `uploads/DSC_0035.jpg` | Que es una tapioca | Foto "Salchipapa" | 1212KB | 96KB |
 | `uploads/DSC_0056.jpg` | Que es una tapioca | Foto "Birra tirada" | 1644KB | 96KB |
 | `uploads/resto_bar (1).jpg` … `(9).jpg` | Donde encontrarnos | Galería crossfade Resto Bar | 1528–2876KB c/u | 96–100KB c/u |
@@ -89,13 +89,32 @@ Estos archivos **no están referenciados en ninguna página** — no afectan el 
 
 No tocados (fuera del alcance de esta limpieza, no son imágenes): `uploads/menu.pdf`, `uploads/Menú • La Tapioquería.pdf`, `uploads/Menú • La Tapioquería-5e170f0a.pdf` — tres PDFs de la carta, tampoco referenciados en el sitio, aparentemente redundantes entre sí.
 
-## Favicon / ícono de la app (agregado 2026-09-18)
+## Favicon / ícono de la app (agregado 2026-09-18, reemplazado 2026-09-25)
 
-El sitio no tenía favicon (404 en las 4 páginas, confirmado con Playwright). Se creó `assets/favicon.svg` (monograma "T" en terracota sobre círculo, dibujado a mano en SVG — no hay un isotipo/marca cuadrada real todavía, así que esto es un placeholder de marca hasta que el dueño del sitio provea un logo isotipo propio) y sus variantes rasterizadas (generadas con Playwright, sirviendo el SVG por HTTP — cargarlo por `file://` da un ícono roto en el navegador sandboxeado, ver nota en el propio proceso si hay que regenerarlas): `assets/favicon-32.png`, `assets/apple-touch-icon.png` (180×180, fondo crema opaco en vez de transparente porque iOS rellena de negro el canal alfa), `assets/icon-192.png` y `assets/icon-512.png`. `site.webmanifest` en la raíz referencia los dos últimos.
+El sitio no tenía favicon (404 en las 4 páginas, confirmado con Playwright). Se creó `assets/favicon.svg` (monograma "T" en terracota sobre círculo, dibujado a mano en SVG — placeholder de marca hasta tener un isotipo real) y sus variantes rasterizadas.
+
+**2026-09-25**: reemplazado por la ilustración de la tapioca (`assets/tapio_dibujo.jpg`, línea terracota sobre fondo crema, la misma que ya se usaba en el hero de "Qué es una tapioca") a pedido del dueño del sitio. Ya no hay favicon en SVG (`assets/favicon.svg` se archivó en `_unused/favicon-monograma-T.svg` — la fuente ahora es un JPG, no un vector, así que no tiene sentido seguir declarando un `<link rel="icon" type="image/svg+xml">`). Generados con Node (`sharp`, `fit:'contain'` sobre fondo `rgb(255,253,240)` para no dejar una costura visible con el fondo casi blanco de la imagen fuente) + `png-to-ico`:
+
+| Archivo | Tamaño | Uso |
+| --- | --- | --- |
+| `favicon.ico` (raíz) | 16/32/48px multi-resolución | `<link rel="icon" href="/favicon.ico">` — compatibilidad con navegadores viejos y el `/favicon.ico` que algunos piden solos |
+| `assets/favicon-16.png` / `favicon-32.png` | 16×16 / 32×32 | ícono de pestaña |
+| `assets/apple-touch-icon.png` | 180×180 | iOS "agregar a inicio" |
+| `assets/icon-192.png` / `icon-512.png` | 192×192 / 512×512 | `site.webmanifest` (PWA/Android) |
+
+A tamaños chicos (16-32px) el dibujo se ve como una forma redondeada terracota reconocible como taco/tapioca, no legible en detalle — es la naturaleza de reducir una ilustración con líneas finas a ese tamaño, no un error de generación.
+
+## Imagen de vista previa al compartir (og:image, agregado 2026-09-25)
+
+Antes cada página usaba una foto de producto distinta como `og:image` (la que se ve al pegar el link en WhatsApp/redes). Ahora **las 4 páginas usan la misma imagen de marca**: `assets/og-tapioca.jpg` (1200×1200, la ilustración de la tapioca centrada sobre fondo crema, generada de la misma fuente `assets/tapio_dibujo.jpg` que el favicon, con `og:image:width`/`og:image:height` declarados). Se eligió cuadrada (1:1) en vez del clásico 1200×630 porque la ilustración fuente es casi cuadrada (382×419) — meterla en un rectángulo 1.91:1 hubiera dejado franjas vacías grandes a los costados. El JSON-LD de cada página **no** cambió: `image` ahí sigue siendo la foto real de producto/local (Google prefiere fotos reales para resultados enriquecidos, no un ícono de marca).
 
 ## Compresión de imágenes en `<img>` (agregado 2026-09-18)
 
 Las imágenes que están fuera del viewport inicial (galerías de `donde-encontrarnos.html`, fotos de Resto·Bar y del lightbox de `menu.html`, footer de las 4 páginas) tienen `loading="lazy"`. Las imágenes del hero de cada página (mural + plantas) se dejaron sin ese atributo a propósito, porque son la imagen LCP (Largest Contentful Paint) y lazy-loadearla empeoraría esa métrica en vez de mejorarla.
+
+## Códigos QR (agregado 2026-09-24)
+
+Página nueva `qr.html` (ver [PAGINAS.md](PAGINAS.md#qrhtml--códigos-qr-2026-09-24)) con un QR por sección del sitio, guardados en `assets/qr/`: `qr-home.webp`, `qr-menu.webp`, `qr-donde-encontrarnos.webp`, `qr-que-es-una-tapioca.webp` y `qr-resena-google.webp` (agregado 2026-09-24, apunta al link de "escribir reseña" de la ficha de Google del local) — ~20KB c/u, 900×900px, WebP **lossless** a propósito — un WebP con pérdida podría introducir artefactos que arruinen la lectura del código. Generados con Node (`qrcode` + `sharp`, error correction level `H`) a partir de las URLs limpias del sitio (`latapioqueria.com.ar/menu`, etc., o la URL de Google en el caso de la reseña) y con el logo `uploads/tapioca_dibujo.webp` superpuesto al centro sobre un fondo redondeado; se verificó que decodifican bien con `jsQR` pese al logo. No dependen de ningún servicio externo (no vencen, no requieren suscripción) — si se necesita regenerarlos (por ejemplo si cambia el dominio) hay que repetir el mismo proceso a mano, no hay un script versionado en el repo para esto.
 
 ## Pendiente / fuera de alcance de esta tarea
 

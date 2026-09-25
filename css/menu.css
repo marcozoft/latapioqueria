@@ -152,8 +152,8 @@
 .menu-section-banner {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
   aspect-ratio: 5 / 4;
   max-height: 420px;
@@ -172,16 +172,34 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(to top, rgba(23, 17, 13, .68) 0%, rgba(23, 17, 13, .32) 32%, rgba(23, 17, 13, 0) 60%);
+  background: linear-gradient(to bottom, rgba(23, 17, 13, .62) 0%, rgba(23, 17, 13, .28) 30%, rgba(23, 17, 13, 0) 58%);
   pointer-events: none;
 }
 
-.menu-section-banner--tapiocas,
-.menu-section-banner--platos { background-image: url('../uploads/tapi_lomo.webp'); }
+.menu-section-banner--tapiocas {
+  background-image: url('../uploads/tapi_lomo.webp');
+  background-position: center 55%;
+}
 
-.menu-section-banner--para-picar { background-image: url('../uploads/DSC_0025.jpg'); }
-.menu-section-banner--papas-fritas { background-image: url('../uploads/salchipapa.webp'); }
-.menu-section-banner--bebidas { background-image: url('../uploads/cerveza.webp'); }
+.menu-section-banner--platos {
+  background-image: url('../uploads/lomo_al_roque.webp');
+  background-position: center 55%;
+}
+
+.menu-section-banner--para-picar {
+  background-image: url('../uploads/coliflor.webp');
+  background-position: 48% 55%;
+}
+
+.menu-section-banner--papas-fritas {
+  background-image: url('../uploads/salchipapa.webp');
+  background-position: center 68%;
+}
+
+.menu-section-banner--bebidas {
+  background-image: url('../uploads/cerveza.webp');
+  background-position: center 40%;
+}
 
 .menu-section-banner .menu-section-title {
   position: relative;
@@ -346,6 +364,16 @@
 .menu-list--single > .menu-item:last-child {
   padding-bottom: 0;
   border-bottom: 0;
+}
+
+/* En mobile las columnas quedan apiladas (una debajo de otra): hay que
+   devolverle la línea punteada al final de cada columna que no sea la
+   última, para separarla de la columna siguiente. */
+@media (max-width: 640px) {
+  .menu-grid > .menu-col:not(:last-child) > .menu-item:last-child {
+    padding-bottom: 16px;
+    border-bottom: 2px dotted #cf7a4a;
+  }
 }
 
 .menu-item-row {
@@ -531,12 +559,19 @@
 }
 
 .menu-photo-btn svg {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 }
 
+/* position: fixed (en vez de absolute) para que el checkbox siempre esté
+   "a la vista" del navegador en (0,0): al usar <label for="..."> el foco
+   pasa a este checkbox, y si quedara fuera del viewport el navegador
+   scrollea la página hasta él (por eso al cerrar la foto el menú saltaba
+   arriba de todo). Con position:fixed nunca hace falta ese scroll. */
 .photo-toggle {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   opacity: 0;
   pointer-events: none;
 }

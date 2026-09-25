@@ -1,0 +1,38 @@
+# La Tapioquería — routing multi-idioma + URLs limpias sin extensión.
+#
+# index.html, menu.html, donde-encontrarnos.html y que-es-una-tapioca.html
+# ya no existen como archivos (se migraron a .php, ver docs/PAGINAS.md):
+# quien tenga esas URLs viejas guardadas o indexadas recibe un 301 a la
+# versión limpia, para no perder el posicionamiento ya ganado.
+#
+# qr.html sigue siendo un archivo .html real, sin idiomas — no participa
+# de este esquema de traducción.
+
+RewriteEngine On
+DirectoryIndex index.php index.html
+
+# 1) URLs viejas .html de las páginas migradas a PHP -> URL limpia (301)
+RewriteRule ^index\.html$ /? [R=301,L]
+RewriteRule ^menu\.html$ /menu [R=301,L]
+RewriteRule ^donde-encontrarnos\.html$ /donde-encontrarnos [R=301,L]
+RewriteRule ^que-es-una-tapioca\.html$ /que-es-una-tapioca [R=301,L]
+
+# 2) /en/<pagina> o /pt/<pagina> -> <pagina>.php?lang=en|pt (rewrite interno, sin redirect)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(en|pt)/?$ index.php?lang=$1 [NC,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(en|pt)/([a-z-]+)/?$ $2.php?lang=$1 [NC,L,QSA]
+
+# 3) Español (sin prefijo) y páginas no traducidas (ej. /qr): /<pagina> -> <pagina>.php o <pagina>.html, el que exista
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([a-z-]+)/?$ $1.php [NC,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([a-z-]+)/?$ $1.html [NC,L,QSA]

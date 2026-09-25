@@ -1,27 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  El idioma de cada página se señaliza con <link rel="alternate" hreflang="...">
+  en el <head> de cada página (ver inc/i18n.php, función hreflang_block) —
+  a propósito NO se repite acá como xhtml:link para no tener dos fuentes
+  de verdad del mismo dato que puedan desincronizarse.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://latapioqueria.com.ar/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://latapioqueria.com.ar/menu.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://latapioqueria.com.ar/en/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://latapioqueria.com.ar/pt/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://latapioqueria.com.ar/menu</loc>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://latapioqueria.com.ar/donde-encontrarnos.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://latapioqueria.com.ar/en/menu</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://latapioqueria.com.ar/pt/menu</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://latapioqueria.com.ar/donde-encontrarnos</loc>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://latapioqueria.com.ar/que-es-una-tapioca.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://latapioqueria.com.ar/en/donde-encontrarnos</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://latapioqueria.com.ar/pt/donde-encontrarnos</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://latapioqueria.com.ar/que-es-una-tapioca</loc>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://latapioqueria.com.ar/en/que-es-una-tapioca</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://latapioqueria.com.ar/pt/que-es-una-tapioca</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

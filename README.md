@@ -2,13 +2,13 @@
 
 # 🫓 La Tapioquería
 
-**Tapiocas brasileñas, açaí y tragos — San Martín de los Andes, Argentina**
+**Tapiocas, tragos y más — San Martín de los Andes, Argentina**
 
 ![Hero de La Tapioquería](screenshots/cover.png)
 
 </div>
 
-Sitio web de **La Tapioquería**, resto bar de tapiocas brasileñas en Belgrano 940, San Martín de los Andes. Cuatro páginas — inicio, carta, ubicaciones y la historia del producto — en **HTML + CSS estático convencional**, sin build ni framework.
+Sitio web de **La Tapioquería**, resto bar de tapiocas brasileñas en Belgrano 940, San Martín de los Andes. Cuatro páginas — inicio, carta, ubicaciones y la historia del producto — en **español, inglés y portugués de Brasil**, con **PHP simple** (sin framework, sin build).
 
 ## ✨ Trabajo realizado
 
@@ -25,7 +25,8 @@ Este repo arrancó como una exportación directa de la herramienta de diseño: i
 | Huecos de contenido: 7 slots de imagen vacíos y un `<video>` sin fuente | Las 4 fotos del FoodTruck Lolog y el video ya están cargados; no quedan huecos de contenido |
 | ~14MB de archivos huérfanos mezclados con los assets reales del sitio | Archivados en `_unused/` (fuera del repo, en `.gitignore`) |
 | Sin repo, sin punto de entrada para hosting estático | Git inicializado + `index.html` como home real + `robots.txt`, listo para desplegar en cualquier host estático |
-| Construido en Claude Design (`.dc.html`, estilos inline, runtime propietario) | Migrado a HTML + CSS estático convencional (`css/base.css` + un CSS por página), sin dependencias de ninguna plataforma |
+| Construido en Claude Design (`.dc.html`, estilos inline, runtime propietario) | Migrado a HTML + CSS estático convencional, y luego a PHP simple (2026-09-25) para poder ofrecer 3 idiomas sin triplicar el HTML a mano |
+| Solo en español | Español (default), inglés (`/en/`) y portugués de Brasil (`/pt/`), con `hreflang`/canonical/JSON-LD correctos por idioma |
 
 Detalle completo de cada punto en [`docs/`](docs/).
 
@@ -33,10 +34,10 @@ Detalle completo de cada punto en [`docs/`](docs/).
 
 | Página | Contenido |
 | --- | --- |
-| [`index.html`](index.html) | Hero, acceso a las otras 3 secciones |
-| [`menu.html`](menu.html) | Carta completa con precios (tapiocas, para picar, papas, platos) |
-| [`donde-encontrarnos.html`](donde-encontrarnos.html) | Resto Bar (todo el año) + FoodTruck en el Lago Lolog (verano) |
-| [`que-es-una-tapioca.html`](que-es-una-tapioca.html) | Qué es una tapioca, origen brasileño, cómo se hace |
+| [`index.php`](index.php) | Hero, acceso a las otras 3 secciones |
+| [`menu.php`](menu.php) | Carta completa con precios (tapiocas, para picar, papas, platos) |
+| [`donde-encontrarnos.php`](donde-encontrarnos.php) | Resto Bar (todo el año) + FoodTruck en el Lago Lolog (verano) |
+| [`que-es-una-tapioca.php`](que-es-una-tapioca.php) | Qué es una tapioca, origen brasileño, cómo se hace |
 
 <div align="center">
 <img src="screenshots/footer4.png" alt="Footer del sitio" width="640">
@@ -44,7 +45,7 @@ Detalle completo de cada punto en [`docs/`](docs/).
 
 ## 🧱 Stack
 
-HTML + CSS estático convencional: 4 páginas `.html`, un `css/base.css` compartido (tokens de color/tipografía, footer, botón de WhatsApp, íconos sociales) y un CSS propio por página. Sin paso de build, sin `package.json`, sin dependencias de ninguna plataforma — se sirve como archivos estáticos en cualquier host. Detalle completo en [`CLAUDE.md`](CLAUDE.md).
+PHP simple: 4 páginas `.php` que comparten estructura vía `include`/`require` (`inc/`) y sacan todo su texto de diccionarios de traducción (`lang/es.php`, `lang/en.php`, `lang/pt.php`). Un `css/base.css` compartido (tokens de color/tipografía, footer, botón de WhatsApp, íconos sociales, selector de idioma) y un CSS propio por página. Sin framework, sin `package.json`, sin paso de build — necesita un hosting con PHP (Hostinger, por ejemplo) y `mod_rewrite` para las URLs limpias (`/menu`, `/en/menu`, `/pt/menu`). Detalle completo en [`CLAUDE.md`](CLAUDE.md).
 
 ## 📚 Documentación
 
@@ -55,13 +56,13 @@ HTML + CSS estático convencional: 4 páginas `.html`, un `css/base.css` compart
 
 ## 🚀 Correrlo local
 
-Es 100% estático, sin dependencias en tiempo de ejecución (salvo Google Fonts y un iframe de terceros en el footer):
+Necesita PHP (a diferencia de la versión 100% estática anterior):
 
 ```bash
-npx serve .
+php -S localhost:8000
 ```
 
-Abrir `http://localhost:PUERTO/` — muestra `index.html` directamente.
+Abrir `http://localhost:8000/` — muestra `index.php` directamente. El servidor embebido de PHP no lee `.htaccess`, así que `/en/menu` y `/pt/menu` no van a andar así (usar `?lang=en`/`?lang=pt` como query string en su lugar); para probar las URLs limpias con prefijo de idioma hace falta un Apache/LiteSpeed real. Ver [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
 ---
 

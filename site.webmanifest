@@ -2,7 +2,7 @@
   "name": "La Tapioquería",
   "short_name": "Tapioquería",
   "description": "Tapiocas brasileñas, resto y bar en San Martín de los Andes.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f2e5cf",
   "theme_color": "#c1502e",
