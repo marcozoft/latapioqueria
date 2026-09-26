@@ -89,11 +89,13 @@ Estos archivos **no están referenciados en ninguna página** — no afectan el 
 
 No tocados (fuera del alcance de esta limpieza, no son imágenes): `uploads/menu.pdf`, `uploads/Menú • La Tapioquería.pdf`, `uploads/Menú • La Tapioquería-5e170f0a.pdf` — tres PDFs de la carta, tampoco referenciados en el sitio, aparentemente redundantes entre sí.
 
-## Favicon / ícono de la app (agregado 2026-09-18, reemplazado 2026-09-25)
+## Favicon / ícono de la app (agregado 2026-09-18, reemplazado 2026-09-25 y 2026-09-26)
 
 El sitio no tenía favicon (404 en las 4 páginas, confirmado con Playwright). Se creó `assets/favicon.svg` (monograma "T" en terracota sobre círculo, dibujado a mano en SVG — placeholder de marca hasta tener un isotipo real) y sus variantes rasterizadas.
 
-**2026-09-25**: reemplazado por la ilustración de la tapioca (`assets/tapio_dibujo.jpg`, línea terracota sobre fondo crema, la misma que ya se usaba en el hero de "Qué es una tapioca") a pedido del dueño del sitio. Ya no hay favicon en SVG (`assets/favicon.svg` se archivó en `_unused/favicon-monograma-T.svg` — la fuente ahora es un JPG, no un vector, así que no tiene sentido seguir declarando un `<link rel="icon" type="image/svg+xml">`). Generados con Node (`sharp`, `fit:'contain'` sobre fondo `rgb(255,253,240)` para no dejar una costura visible con el fondo casi blanco de la imagen fuente) + `png-to-ico`:
+**2026-09-25**: reemplazado por una primera ilustración de la tapioca (línea terracota sobre fondo crema) a pedido del dueño del sitio. Ya no hay favicon en SVG (`assets/favicon.svg` se archivó en `_unused/favicon-monograma-T.svg`).
+
+**2026-09-26**: reemplazado de nuevo por otra versión de la misma ilustración, esta vez línea **crema sobre fondo terracota sólido** (`assets/tapioca_fondo_colorado.png`, 1254×1254 — la fuente de 2026-09-25 quedó archivada en `_unused/tapio_dibujo-favicon-viejo.jpg`). Al ser el fondo un color plano y uniforme (no un degradé/vignette como la fuente anterior), no hace falta componer sobre un color de relleno para evitar una costura — alcanza con recortar y escalar directamente. Generados con Node (`sharp`, recorte cuadrado ajustado al dibujo con ~12% de margen para que se lea mejor en los tamaños chicos, filtro `lanczos3`) + `png-to-ico`:
 
 | Archivo | Tamaño | Uso |
 | --- | --- | --- |
@@ -102,11 +104,11 @@ El sitio no tenía favicon (404 en las 4 páginas, confirmado con Playwright). S
 | `assets/apple-touch-icon.png` | 180×180 | iOS "agregar a inicio" |
 | `assets/icon-192.png` / `icon-512.png` | 192×192 / 512×512 | `site.webmanifest` (PWA/Android) |
 
-A tamaños chicos (16-32px) el dibujo se ve como una forma redondeada terracota reconocible como taco/tapioca, no legible en detalle — es la naturaleza de reducir una ilustración con líneas finas a ese tamaño, no un error de generación.
+A tamaños chicos (16-32px) el dibujo se ve como una forma redondeada clara sobre fondo terracota, reconocible como taco/tapioca pero no legible en detalle — es la naturaleza de reducir una ilustración con líneas finas a ese tamaño, no un error de generación.
 
-## Imagen de vista previa al compartir (og:image, agregado 2026-09-25)
+## Imagen de vista previa al compartir (og:image, agregado 2026-09-25, actualizado 2026-09-26)
 
-Antes cada página usaba una foto de producto distinta como `og:image` (la que se ve al pegar el link en WhatsApp/redes). Ahora **las 4 páginas usan la misma imagen de marca**: `assets/og-tapioca.jpg` (1200×1200, la ilustración de la tapioca centrada sobre fondo crema, generada de la misma fuente `assets/tapio_dibujo.jpg` que el favicon, con `og:image:width`/`og:image:height` declarados). Se eligió cuadrada (1:1) en vez del clásico 1200×630 porque la ilustración fuente es casi cuadrada (382×419) — meterla en un rectángulo 1.91:1 hubiera dejado franjas vacías grandes a los costados. El JSON-LD de cada página **no** cambió: `image` ahí sigue siendo la foto real de producto/local (Google prefiere fotos reales para resultados enriquecidos, no un ícono de marca).
+Antes cada página usaba una foto de producto distinta como `og:image` (la que se ve al pegar el link en WhatsApp/redes). Ahora **las 5 páginas usan la misma imagen de marca**: `assets/og-tapioca.jpg` (1200×1200, la ilustración de la tapioca —línea crema sobre fondo terracota— generada desde `assets/tapioca_fondo_colorado.png`, con `og:image:width`/`og:image:height` declarados). Se eligió cuadrada (1:1) en vez del clásico 1200×630 porque la ilustración fuente ya es cuadrada — meterla en un rectángulo 1.91:1 hubiera dejado franjas vacías grandes a los costados. El JSON-LD de cada página **no** cambió: `image` ahí sigue siendo la foto real de producto/local (Google prefiere fotos reales para resultados enriquecidos, no un ícono de marca).
 
 ## Compresión de imágenes en `<img>` (agregado 2026-09-18)
 
