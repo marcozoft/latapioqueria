@@ -1,0 +1,448 @@
+/* La Tapioquería — Nuestra Historia */
+
+.historia-page {
+  width: 100%;
+  font-family: var(--font-body);
+  color: var(--color-sage-dark2);
+  background: var(--color-bg-cream);
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: clamp(11px, 1.4vw, 13px);
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--color-terracota-mid);
+}
+
+.eyebrow--light {
+  color: var(--color-orange-accent);
+}
+
+/* ---- Hero ----
+   Mismo patrón que .donde-hero / .tapioca-hero (ver css/donde-encontrarnos.css
+   y css/que-es-una-tapioca.css): altura compacta, fondo del mural con las
+   plantas a los costados, título en terracota — así las 4 subpáginas
+   comparten la misma estética y altura de header+hero. */
+
+.historia-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(46svh, 400px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(70px, 10vw, 110px) clamp(20px, 6vw, 80px);
+  box-sizing: border-box;
+}
+
+.historia-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.historia-hero-bg--mobile { display: none; }
+
+@media (max-width: 640px) {
+  .historia-hero-bg--desktop { display: none; }
+  .historia-hero-bg--mobile { display: block; }
+}
+
+.historia-hero-plant {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(140px, 26vw, 280px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .historia-hero-plant { width: clamp(80px, 20vw, 150px); opacity: .8; }
+}
+
+.historia-hero-plant--left { left: 0; }
+.historia-hero-plant--right { right: 0; }
+
+.historia-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.historia-hero-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1.1;
+  font-size: clamp(26px, 5vw, 50px);
+  color: var(--color-terracota);
+}
+
+.historia-hero-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.historia-hero-subtitle-line {
+  display: block;
+  width: clamp(18px, 5vw, 40px);
+  height: 2px;
+  background: var(--color-sage);
+}
+
+.historia-hero-subtitle-text {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 2vw, 18px);
+  color: var(--color-sage-dark);
+}
+
+.historia-hero-desc {
+  margin: 0;
+  max-width: 48ch;
+  font-weight: 300;
+  font-size: clamp(13px, 1.6vw, 16px);
+  line-height: 1.55;
+  color: rgba(61, 43, 29, .72);
+  text-wrap: pretty;
+}
+
+/* ---- Botón "Ver video de nuestra historia" + modal ----
+   El modal reutiliza el mismo patrón checkbox-hack que las fotos del menú
+   (ver .photo-toggle/.photo-modal en css/menu.css, copiado acá porque
+   historia.php no carga ese archivo) para no agregar JS solo para abrir
+   y cerrar un overlay; el video en sí no tiene efecto de scroll, se abre
+   entero al tocar el botón y listo. */
+
+.photo-toggle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.photo-toggle:checked + .photo-modal {
+  display: flex;
+}
+
+.photo-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 17, 13, .78);
+  cursor: pointer;
+}
+
+.photo-modal-box {
+  position: relative;
+  max-width: min(90vw, 640px);
+  max-height: 85vh;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(23, 17, 13, .6);
+  color: var(--color-cream-text2);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.historia-video-cta-wrap {
+  display: flex;
+  justify-content: center;
+  padding: clamp(26px, 4vw, 40px) 20px;
+  background: var(--color-bg-cream);
+}
+
+.historia-video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+  color: var(--color-cream-text2);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: clamp(12.5px, 1.5vw, 14px);
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.historia-video-btn:hover {
+  background: var(--color-terracota-mid);
+  transform: translateY(-2px);
+}
+
+.historia-video-modal-box {
+  width: min(90vw, 420px);
+  max-width: min(90vw, 420px);
+  background: var(--color-brown-warm);
+  padding-bottom: 14px;
+}
+
+.historia-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 78vh;
+  object-fit: contain;
+  background: var(--color-brown-warm);
+}
+
+.historia-video-caption {
+  margin: 10px 16px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(253, 241, 224, .8);
+}
+
+/* ---- Timeline de capítulos ---- */
+
+.historia-timeline {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 6vw, 56px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 10vw, 120px);
+}
+
+.historia-road {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 50%;
+  z-index: 0;
+  width: 4px;
+  height: calc(100% - 80px);
+  transform: translateX(-50%);
+  overflow: visible;
+  pointer-events: none;
+  display: none;
+}
+
+.historia-road path {
+  fill: none;
+  stroke: var(--color-terracota);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: .35;
+}
+
+@media (min-width: 861px) {
+  .historia-road { display: block; }
+}
+
+.historia-chapter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+}
+
+@media (min-width: 861px) {
+  .historia-chapter {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 90px);
+  }
+
+  .historia-chapter--reverse .historia-chapter-media { order: 2; }
+  .historia-chapter--reverse .historia-chapter-text { order: 1; text-align: right; align-items: flex-end; }
+}
+
+.historia-chapter-media {
+  position: relative;
+}
+
+.historia-chapter-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(23, 17, 13, .22);
+}
+
+.historia-chapter-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.historia-chapter-year {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(13px, 1.6vw, 15px);
+  letter-spacing: .14em;
+  color: var(--color-terracota);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  font-size: clamp(24px, 3.6vw, 38px);
+  color: var(--color-sage-dark2);
+}
+
+.section-title--light {
+  color: var(--color-cream-text);
+}
+
+.historia-chapter-text p {
+  margin: 0;
+  max-width: 48ch;
+  font-size: clamp(14px, 1.6vw, 16.5px);
+  line-height: 1.7;
+  color: var(--color-text-green);
+  text-wrap: pretty;
+}
+
+/* ---- Cierre ---- */
+
+.historia-closing {
+  position: relative;
+  width: 100%;
+  background: var(--color-sage-dark);
+  padding: clamp(56px, 8vw, 100px) clamp(20px, 6vw, 56px);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+}
+
+@media (min-width: 861px) {
+  .historia-closing {
+    grid-template-columns: 1fr 1.2fr;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+
+.historia-closing-img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .3);
+}
+
+.historia-closing-text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.historia-closing-text p {
+  margin: 0;
+  max-width: 50ch;
+  font-size: clamp(14.5px, 1.7vw, 17px);
+  line-height: 1.7;
+  color: rgba(247, 236, 216, .86);
+  text-wrap: pretty;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 34px;
+  border-radius: 999px;
+  background: var(--color-terracota);
+  color: var(--color-cream-text2);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: clamp(13px, 1.6vw, 15px);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.cta-button:hover {
+  background: var(--color-terracota-mid);
+  transform: translateY(-2px);
+}
+
+/* ---- Estado inicial para la animación (progressive enhancement) ----
+   Solo se aplica cuando JS confirma que GSAP cargó y va a animar; si el
+   script no corre (CDN caído, JS deshabilitado) el contenido queda
+   visible de entrada, nunca oculto a mitad de camino. */
+
+.historia-js-ready .historia-chapter-media,
+.historia-js-ready .historia-chapter-text {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.historia-js-ready .historia-closing-img,
+.historia-js-ready .historia-closing-text {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .historia-js-ready .historia-chapter-media,
+  .historia-js-ready .historia-chapter-text,
+  .historia-js-ready .historia-closing-img,
+  .historia-js-ready .historia-closing-text {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -30,6 +30,13 @@ html, body {
   background:
     linear-gradient(rgba(242, 229, 207, .8), rgba(242, 229, 207, .8)),
     url('../assets/mural/mural_sombra.webp') center / cover no-repeat fixed;
+}
+
+/* Solo en <html>, no en <body>: si ambos declaran overflow-x, <body> pasa
+   a ser su propio contenedor de scroll (efecto lateral del emparejamiento
+   de overflow-x/overflow-y) y cualquier position: sticky dentro de él deja
+   de pegarse — pasa en historia.php, con el video con scroll scrubbing. */
+html {
   overflow-x: hidden;
 }
 

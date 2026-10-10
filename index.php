@@ -100,16 +100,32 @@ $jsonld = [
 
   <nav class="landing-nav">
     <a class="nav-card nav-card--cream" href="<?= page_url('que-es-una-tapioca') ?>">
-      <span class="nav-card-index">01</span>
+      <span class="nav-card-top">
+        <span class="nav-card-index">01</span>
+        <img class="nav-card-icon" src="/uploads/tapioca_dibujo.webp" alt="" aria-hidden="true">
+      </span>
       <span class="nav-card-label"><?= t('home.nav_tapioca') ?><span class="nav-card-arrow">→</span></span>
     </a>
     <a class="nav-card nav-card--terracota" href="<?= page_url('menu') ?>">
-      <span class="nav-card-index">02</span>
+      <span class="nav-card-top">
+        <span class="nav-card-index">02</span>
+        <img class="nav-card-icon" src="/assets/menu.svg" alt="" aria-hidden="true">
+      </span>
       <span class="nav-card-label"><?= t('home.nav_menu') ?><span class="nav-card-arrow">→</span></span>
     </a>
     <a class="nav-card nav-card--sage" href="<?= page_url('donde-encontrarnos') ?>">
-      <span class="nav-card-index">03</span>
+      <span class="nav-card-top">
+        <span class="nav-card-index">03</span>
+        <img class="nav-card-icon" src="/assets/donde-encontrarnos.svg" alt="" aria-hidden="true">
+      </span>
       <span class="nav-card-label"><?= t('home.nav_donde') ?><span class="nav-card-arrow">→</span></span>
+    </a>
+    <a class="nav-card nav-card--brown" href="<?= page_url('historia') ?>">
+      <span class="nav-card-top">
+        <span class="nav-card-index">04</span>
+        <img class="nav-card-icon" src="/assets/historia.svg" alt="" aria-hidden="true">
+      </span>
+      <span class="nav-card-label"><?= t('home.nav_historia') ?><span class="nav-card-arrow">→</span></span>
     </a>
   </nav>
 
