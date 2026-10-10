@@ -56,7 +56,7 @@ return [
           ['id' => 'coliflor-manchurian', 'name' => 'Coliflor Manchurian', 'price' => 13500, 'photo' => 'coliflor'],
         ],
         [
-          ['id' => 'pizzetas-de-mbeju', 'name' => 'Pizzetas de Mbejú', 'price' => 16000, 'photo' => 'pizzetas'],
+          ['id' => 'pizzetas-de-mbeju', 'name' => 'Pizzetas de Mbejú', 'price' => 18000, 'photo' => 'pizzetas'],
           ['id' => 'pesto-y-cherry', 'name' => 'Pesto y cherry', 'inline' => true],
           ['id' => 'peras-y-roquefort', 'name' => 'Peras y roquefort', 'inline' => true],
         ],
