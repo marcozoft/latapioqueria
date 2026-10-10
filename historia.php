@@ -111,6 +111,7 @@ $jsonld = [
     <?php require __DIR__ . '/inc/language-switcher.php'; ?>
 
     <div class="historia-hero-content">
+      <img class="historia-hero-icon" src="/assets/historia.svg" alt="<?= t('historia.illustration_alt') ?>">
       <h1 class="historia-hero-title"><?= t('historia.hero_title') ?></h1>
       <div class="historia-hero-subtitle">
         <span class="historia-hero-subtitle-line"></span>

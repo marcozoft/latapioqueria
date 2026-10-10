@@ -77,6 +77,7 @@ return [
   'menu' => [
     'h1_sr' => 'Cardápio da La Tapioquería: tapiocas, petiscos, batatas fritas, pratos e bebidas',
     'subtitle' => 'Cardápio',
+    'illustration_alt' => 'Ilustração de um prato fumegante',
     'legend_veg' => 'Vegetariano',
     'legend_picante' => 'Picante',
     'legend_recomendada' => 'Recomendado',
@@ -197,6 +198,7 @@ return [
   ],
 
   'donde' => [
+    'illustration_alt' => 'Ilustração da nossa casa',
     'hero_title' => 'Onde nos<br>encontrar?',
     'hero_subtitle' => 'San Martín de los Andes',
     's1_eyebrow' => 'Aberto o ano todo',
@@ -275,6 +277,7 @@ return [
 
   'historia' => [
     'hero_eyebrow' => 'Storytime',
+    'illustration_alt' => 'Ilustração do nosso food truck',
     'hero_title' => 'Nossa<br>História',
     'hero_desc' => 'De uma viagem pelo Brasil a um restô bar na Patagônia: assim nasceu a La Tapioquería.',
     'video_caption' => 'De como nasceu a La Tapioquería.',

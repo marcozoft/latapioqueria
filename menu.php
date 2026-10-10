@@ -127,6 +127,7 @@ function menu_item_name_by_id(string $id): string {
     <?php require __DIR__ . '/inc/language-switcher.php'; ?>
     <div class="menu-hero-content">
       <h1 class="sr-only"><?= t('menu.h1_sr') ?></h1>
+      <img class="menu-hero-icon" src="/assets/menu.svg" alt="<?= t('menu.illustration_alt') ?>">
       <img class="menu-hero-logo" src="/assets/logo-tapioqueria-texto.svg" alt="La Tapioquería">
       <div class="menu-hero-subtitle">
         <span class="menu-hero-subtitle-line"></span>

@@ -1,5 +1,10 @@
 /* La Tapioquería — Nuestra Historia */
 
+@keyframes floatY {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
 .historia-page {
   width: 100%;
   font-family: var(--font-body);
@@ -79,6 +84,14 @@
   align-items: center;
   gap: 14px;
   text-align: center;
+}
+
+.historia-hero-icon {
+  width: clamp(80px, 9vw, 110px);
+  height: clamp(58px, 6.5vw, 78px);
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(23, 17, 13, .2));
+  animation: floatY 7s ease-in-out infinite;
 }
 
 .historia-hero-title {

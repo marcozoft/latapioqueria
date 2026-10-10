@@ -76,6 +76,7 @@ return [
   'menu' => [
     'h1_sr' => 'Carta de La Tapioquería: tapiocas, para picar, papas fritas, platos y bebidas',
     'subtitle' => 'Menú',
+    'illustration_alt' => 'Ilustración de un plato humeante',
     'legend_veg' => 'Vegetariano',
     'legend_picante' => 'Picante',
     'legend_recomendada' => 'Recomendada',
@@ -186,6 +187,7 @@ return [
   ],
 
   'donde' => [
+    'illustration_alt' => 'Ilustración de nuestra casa',
     'hero_title' => '¿Dónde<br>encontrarnos?',
     'hero_subtitle' => 'San Martín de los Andes',
     's1_eyebrow' => 'Abierto todo el año',
@@ -264,6 +266,7 @@ return [
 
   'historia' => [
     'hero_eyebrow' => 'Storytime',
+    'illustration_alt' => 'Ilustración de nuestro foodtruck',
     'hero_title' => 'Nuestra<br>Historia',
     'hero_desc' => 'De un viaje por Brasil a un resto bar en la Patagonia: así nació La Tapioquería.',
     'video_caption' => 'De cómo nació La Tapioquería.',

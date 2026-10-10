@@ -104,6 +104,7 @@ $lologAlt = t('donde.gallery_lolog_alt');
     <?php require __DIR__ . '/inc/language-switcher.php'; ?>
 
     <div class="donde-hero-content">
+      <img class="donde-hero-icon" src="/assets/donde-encontrarnos.svg" alt="<?= t('donde.illustration_alt') ?>">
       <h1 class="donde-hero-title"><?= t('donde.hero_title') ?></h1>
       <div class="donde-hero-subtitle">
         <span class="donde-hero-subtitle-line"></span>

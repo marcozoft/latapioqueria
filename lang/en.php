@@ -78,6 +78,7 @@ return [
   'menu' => [
     'h1_sr' => 'La Tapioquería menu: tapiocas, starters, fries, mains and drinks',
     'subtitle' => 'Menu',
+    'illustration_alt' => 'Illustration of a steaming plate',
     'legend_veg' => 'Vegetarian',
     'legend_picante' => 'Spicy',
     'legend_recomendada' => 'Recommended',
@@ -198,6 +199,7 @@ return [
   ],
 
   'donde' => [
+    'illustration_alt' => 'Illustration of our house',
     'hero_title' => 'Where to<br>find us?',
     'hero_subtitle' => 'San Martín de los Andes',
     's1_eyebrow' => 'Open all year',
@@ -276,6 +278,7 @@ return [
 
   'historia' => [
     'hero_eyebrow' => 'Storytime',
+    'illustration_alt' => 'Illustration of our food truck',
     'hero_title' => 'Our<br>Story',
     'hero_desc' => 'From a trip through Brazil to a resto bar in Patagonia: this is how La Tapioquería began.',
     'video_caption' => 'How La Tapioquería was born.',
