@@ -305,8 +305,8 @@
 }
 
 .nav-card-icon {
-  width: clamp(84px, 11vw, 130px);
-  height: clamp(60px, 8vw, 92px);
+  width: clamp(107px, 21.7vw, 240px);
+  height: clamp(77px, 12.75vw, 235px);
   object-fit: contain;
   object-position: right center;
   flex-shrink: 0;
@@ -315,8 +315,12 @@
 
 @media (max-width: 640px) {
   .nav-card-icon {
-    width: clamp(160px, 42vw, 200px);
-    height: clamp(114px, 30vw, 142px);
+    /* El doble (320-436px) se pasa del ancho real disponible en una
+       tarjeta de celular (~228-326px de contenido) y desborda la
+       tarjeta — este es el máximo que entra sin cortar nada, calculado
+       contra ese ancho real. */
+    width: clamp(180px, 58vw, 240px);
+    height: clamp(134px, 43vw, 178px);
   }
 }
 
