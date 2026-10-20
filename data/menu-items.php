@@ -33,9 +33,9 @@ return [
           ['id' => 'eggstacy', 'name' => 'Eggstacy', 'price' => 20800, 'flags' => ['vegetariano']],
           ['id' => 'napolitana', 'name' => 'Napolitana', 'price' => 15800, 'flags' => ['vegetariano']],
           ['id' => 'oriental', 'name' => 'Oriental', 'price' => 18500, 'flags' => ['vegetariano']],
-        ],
-        [
           ['id' => 'bondiola-y-miel', 'name' => 'Bondiola y Miel', 'price' => 25200],
+        ],
+        [      
           ['id' => 'bomba-de-roque', 'name' => 'Bomba de Roque', 'price' => 17800, 'flags' => ['vegetariano']],
           ['id' => 'quilpo', 'name' => 'Quilpo', 'price' => 22400],
           ['id' => 'clasica', 'name' => 'Clásica', 'price' => 16000],
